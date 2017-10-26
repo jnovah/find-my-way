@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import PlanMyTrip from './containers/PlanMyTrip'
 
 class FindMyWay extends Component {
   constructor(props) {
@@ -8,19 +10,23 @@ class FindMyWay extends Component {
     }
   }
 
-  componentDidMount() {
-    fetch('api/v1/users')
-    .then(response => {
-      return response.json()
-    })
-    .then(body => {
-      console.log(body);
-    })
-  }
+  // componentDidMount() {
+  //   fetch('api/v1/users')
+  //   .then(response => {
+  //     return response.json()
+  //   })
+  //   .then(body => {
+  //     console.log(body);
+  //   })
+  // }
 
   render() {
     return(
-      <h1>Hello from react</h1>
+
+      <BrowserRouter>
+        <PlanMyTrip />
+      </BrowserRouter>
+
     )
   }
 }
