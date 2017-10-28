@@ -1,0 +1,41 @@
+Find my way
+
+- Sign up
+As a traveler
+I want to sign up for Find My Way
+So that I can plan my next road-trip
+
+Acceptance Criteria
+*Registration requires first name, last name, valid email
+*Optional upload of picture for profile
+*Traveler is able to sign in and start planning their first trip!
+
+- Plan a trip
+As a traveler
+I want to begin planning a trip
+So I can satisfy my wanderlust
+
+Acceptance Criteria
+*Traveler can pick a starting location
+*Traveler can pick an ending location
+*Distance and travel time are automatically calculated
+
+- Choose places to stop
+As a traveler
+I want to plan sites at which to stop
+So that I can see everything that I can possibly see
+
+Acceptance Criteria
+*Traveler can pick intermediate locations where they would like to stop
+*Distance and travel time are automatically recalculated
+*Once the trip has begun, the traveler can add places that they stop along the way
+
+- Build a scrap book
+As I traveler
+I want to upload my photos and record my experiences associate with each destination I visit
+So that I can share my experience with friends and family when my trip is complete
+
+Acceptance Criteria
+*Pictures and "journal" entries can be added to the association with each location
+*A "scapbook" (show page) is available for view by location stopped
+*User has access to a time-line of the trip
