@@ -17,7 +17,9 @@ end
 
 group :development, :test do
   gem 'capybara'
+  gem 'factory_bot'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'launchy', require: false
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'

@@ -6,4 +6,5 @@ class Trip < ApplicationRecord
 
   validates_presence_of :user
   validates_presence_of :title
+  validate :status, presence: true, inclusion: { in: ["planning", "en route", "completed"] }
 end
