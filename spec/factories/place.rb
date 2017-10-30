@@ -1,7 +1,4 @@
 FactoryBot.define do
-  sequence :google_place_id do |n|
-    Faker::Lorem.characters(11) + n.to_s
-  end
 
   sequence :address do |n|
     n.to_s + Faker::Address.street_address
@@ -9,6 +6,7 @@ FactoryBot.define do
 
   factory :place do
     name Faker::Address.city
+    google_place_id Faker::Lorem.characters(11)
   end
 
   trait :start do
@@ -22,8 +20,28 @@ FactoryBot.define do
   trait :stop do
     type "stop"
   end
+end
 
-  before(:create) do |place|
-    # place.trip << create(:trip)
+FactoryBot.define do
+  factory :start do
+    name Faker::Address.city
+    google_place_id Faker::Lorem.characters(11)
+    type "start"
+  end
+end
+
+FactoryBot.define do
+  factory :end do
+    name Faker::Address.city
+    google_place_id Faker::Lorem.characters(11)
+    type "end"
+  end
+end
+
+FactoryBot.define do
+  factory :stop do
+    name Faker::Address.city
+    google_place_id Faker::Lorem.characters(11)
+    type "stop"
   end
 end

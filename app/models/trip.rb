@@ -3,8 +3,9 @@ class Trip < ApplicationRecord
   has_one :start
   has_one :end
   has_many :stops
+  has_many :places
 
   validates_presence_of :user
   validates_presence_of :title
-  validate :status, presence: true, inclusion: { in: ["planning", "en route", "completed"] }
+  validates :status, presence: true, inclusion: { in: ["planning", "en route", "completed"] }
 end

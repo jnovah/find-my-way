@@ -15,8 +15,4 @@ FactoryBot.define do
   trait :completed do
     staus "completed"
   end
-
-  before(:create) do |trip|
-    # trip.user << create(:user)
-  end
 end
