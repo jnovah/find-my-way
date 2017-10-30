@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink, Switch, Route } from 'react-router-dom'
-import Start from '../components/Start'
+import NewTrip from '../components/tripPlanning/NewTrip'
+import Start from '../components/tripPlanning/Start'
 
 class Home extends Component {
   constructor(props) {
@@ -10,16 +11,12 @@ class Home extends Component {
     }
   }
 
-  calculateBaseDistance(formPayLoad) {
-    fetch
-  }
-
   render() {
     return(
       <Switch>
-        <Route path='/start' component={Start} />
-        <NavLink to='/start'>
-        <button>Lets Start Planning!</button>
+        <Route path='/new_trip' component={NewTrip} />
+        <NavLink to='/new_trip'>
+        <button>Create a New Trip to Plan!</button>
       </NavLink>
     </Switch>
   )
