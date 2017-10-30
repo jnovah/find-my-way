@@ -1,6 +1,7 @@
 require "net/http"
 
 class Api::V1::LocationsController < ApplicationController
+  before_action :authenticate
   def index
 
   end
