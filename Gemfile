@@ -8,6 +8,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem "active_model_serializers"
 group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
@@ -16,7 +17,9 @@ end
 
 group :development, :test do
   gem 'capybara'
+  gem 'factory_bot'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'launchy', require: false
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'

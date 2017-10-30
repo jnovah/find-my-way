@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import PlanMyTrip from './containers/PlanMyTrip'
 
-const FindMyWay = props => {
-  return(
-    <h1>Hello from react</h1>
-  )
+class FindMyWay extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentUser: {}
+    }
+  }
+
+  // componentDidMount() {
+  //   fetch('api/v1/users')
+  //   .then(response => {
+  //     return response.json()
+  //   })
+  //   .then(body => {
+  //     console.log(body);
+  //   })
+  // }
+
+  render() {
+    return(
+
+      <BrowserRouter>
+        <PlanMyTrip />
+      </BrowserRouter>
+
+    )
+  }
 }
 
 export default FindMyWay
