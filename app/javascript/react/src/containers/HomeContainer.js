@@ -1,22 +1,21 @@
 import React, { Component } from 'react'
 import { NavLink, Switch, Route } from 'react-router-dom'
-import NewTrip from '../components/tripPlanning/NewTrip'
-import Start from '../components/tripPlanning/Start'
+import NewTrip from './tripPlanning/NewTrip'
 
 class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      userId: ''
     }
   }
 
   render() {
     return(
       <Switch>
-        <Route path='/new_trip' component={NewTrip} />
-        <NavLink to='/new_trip'>
-        <button>Create a New Trip to Plan!</button>
+        <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
+        <NavLink to='/newtrip/start'>
+          Plan a new trip!
       </NavLink>
     </Switch>
   )
