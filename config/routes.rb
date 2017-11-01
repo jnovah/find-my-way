@@ -14,12 +14,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'users/user_id'
       resources :users, only: [:index, :new]
-    
+
       resources :trips
 
-      post '/places/create_start'
-      post '/places/create_end'
-      post '/places/create_stop'
+      post '/places/start_create'
+      post '/places/final_create'
+      post '/places/stop_create'
       resources :locations, only: [:index, :new]
     end
   end

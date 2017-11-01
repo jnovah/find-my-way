@@ -3,30 +3,30 @@ class Api::V1::PlacesController < ApplicationController
 
   protect_from_forgery unless: -> { request.format.json? }
 
-  def create_start
+  def start_create
     start = Start.new(places_params)
     if start.save
-      render json: start
+      render json: {location: start, type: start.type}
     end
   end
 
-  def create_end
+  def final_create
     final = End.new(places_params)
     if final.save
-      render json: final
+      render json: {location: final, type: final.type}
     end
   end
 
-  def create_stop
+  def stop_create
     stop = Stop.new(places_params)
     if stop.save
-      render json: stop
+      render json: {location: stop, type: stop.type}
     end
   end
 
   private
 
   def places_params
-    params.require(:place).permit(:address, :lat, :long, :trip_id)
+    params.require(:place).permit(:address, :lat, :long, :trip_id, :name)
   end
 end

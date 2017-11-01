@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import FormField from '../../components/FormField'
 
 
 class Places extends Component {
@@ -11,11 +12,14 @@ class Places extends Component {
       type: '',
       lat: '',
       long: '',
-      placeId: ''
+      placeId: '',
+      name: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.formPayLoad = this.formPayLoad.bind(this)
+    this.handleFormClear = this.handleFormClear.bind(this)
+    this.handleNameChange = this.handleNameChange.bind(this)
   }
 
   componentDidMount() {
@@ -26,6 +30,11 @@ class Places extends Component {
     this.setState({ address: event })
   }
 
+  handleNameChange(event) {
+    let name = event.target.name
+    this.setState({ [name]: event.target.value })
+  }
+
   handleSubmit(event) {
     event.preventDefault()
     geocodeByAddress(this.state.address)
@@ -33,14 +42,18 @@ class Places extends Component {
       return getLatLng(results[0])
     }) .then(latLng => {
       let payLoad = this.formPayLoad(latLng)
-      this.props.addNewPlace(payLoad, this.state.type)
+      this.props.addNewPlace(payLoad, this.props.type)
+      this.handleFormClear()
     })
-
   }
 
   formPayLoad(coordinates){
-    let payLoad = { address: this.state.address, lat: coordinates.lat, long: coordinates.lng, trip_id:this.props.tripId}
+    let payLoad = { address: this.state.address, lat: coordinates.lat, long: coordinates.lng, trip_id:this.props.tripId, name: this.state.name}
     return payLoad
+  }
+
+  handleFormClear() {
+    this.setState({address: '', lat: '', long: '', name: ''})
   }
 
   render(){
@@ -52,6 +65,12 @@ class Places extends Component {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
+          <FormField
+            label='Give a name for this location:'
+            name='name'
+            value={this.state.name}
+            handleChange={this.handleNameChange}
+          /><br/>
           <PlacesAutocomplete inputProps={inputProps} />
           <input type='submit' name='Next' />
         </form>

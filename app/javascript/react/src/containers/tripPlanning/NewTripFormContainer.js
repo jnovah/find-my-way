@@ -15,7 +15,6 @@ class NewTripFormContainer extends Component {
 
   handleChange(event) {
     let name = event.target.name
-    let changeState = this.state[event.target.name]
     this.setState({ [name]: event.target.value })
   }
 

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Route, Switch, NavLink } from 'react-router-dom'
 import Places from './Places'
+import PlacesEndpointTile from '../../components/tripPlanning/PlacesEndpointTile'
 
 class NewPlacesContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      types: { start: false, end: false },
+      types: { start: false, final: false, stop: false },
       tripId: '',
       places: []
     }
@@ -18,7 +19,7 @@ class NewPlacesContainer extends Component {
   }
 
   addNewPlace(payLoad, type) {
-    fetch(`/api/v1/places/create_${type}.json`, {
+    fetch(`/api/v1/places/${type}_create.json`, {
       method: "POST",
       body: JSON.stringify(payLoad),
       credentials: "same-origin",
@@ -26,24 +27,35 @@ class NewPlacesContainer extends Component {
     }) .then(response => {
         return response.json()})
     .then(body => {
-      // typeUpdate = Object.assign({}, this.state.types)
-      // this.setState({ places})
+      let typeUpdate = Object.assign({}, this.state.types)
+      typeUpdate[type] = true
+      this.setState({ places: [...this.state.places, body], types: typeUpdate })
     })
   }
 
 
   render() {
-    let place
+    let placeForm
     if (this.state.types.start === false) {
-        place = <Places tripId={this.state.tripId} type='start' placeholder='Add a starting location!' addNewPlace={this.addNewPlace}/>
-    } else if (this.state.types.start === true && props.types.end === false) {
-        place = <Places tripId={this.state.tripId} type='end'placeholder='Add a final destination!' addNewPlace={this.addNewPlace}/>
-    } else if (this.state.types.start === true && props.types.end === true){
-        place = <Places tripId={this.state.tripId} type='stop' placeholder='Add a pit stop!' addNewPlace={this.addNewPlace}/>
+        placeForm = <Places tripId={this.state.tripId} type='start' placeholder='Add a starting location!' addNewPlace={this.addNewPlace}/>
+    } else if (this.state.types.start === true && this.state.types.final === false) {
+        placeForm = <Places tripId={this.state.tripId} type='final'placeholder='Add a final destination!' addNewPlace={this.addNewPlace}/>
+    } else if (this.state.types.start === true && this.state.types.final === true){
+        placeForm = <Places tripId={this.state.tripId} type='stop' placeholder='Add a pit stop!' addNewPlace={this.addNewPlace}/>
     }
+    let place = this.state.places.map(place => {
+      return(
+        <PlacesEndpointTile place={place} />
+      )
+    })
     return(
       <div>
-        {place}
+        <div>
+          {place}
+        </div>
+        <div>
+          {placeForm}
+        </div>
       </div>
     )
   }
