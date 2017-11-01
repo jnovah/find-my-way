@@ -1,25 +1,21 @@
 import React, { Component } from 'react'
 import { NavLink, Switch, Route } from 'react-router-dom'
-import Start from '../components/Start'
+import NewTrip from './tripPlanning/NewTrip'
 
 class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      userId: ''
     }
-  }
-
-  calculateBaseDistance(formPayLoad) {
-    fetch
   }
 
   render() {
     return(
       <Switch>
-        <Route path='/start' component={Start} />
-        <NavLink to='/start'>
-        <button>Lets Start Planning!</button>
+        <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
+        <NavLink to='/newtrip/start'>
+          Plan a new trip!
       </NavLink>
     </Switch>
   )

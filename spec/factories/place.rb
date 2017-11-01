@@ -6,7 +6,6 @@ FactoryBot.define do
 
   factory :place do
     name Faker::Address.city
-    google_place_id Faker::Lorem.characters(11)
   end
 
   trait :start do
@@ -25,7 +24,6 @@ end
 FactoryBot.define do
   factory :start do
     name Faker::Address.city
-    google_place_id Faker::Lorem.characters(11)
     type "start"
   end
 end
@@ -33,7 +31,6 @@ end
 FactoryBot.define do
   factory :end do
     name Faker::Address.city
-    google_place_id Faker::Lorem.characters(11)
     type "end"
   end
 end
@@ -41,7 +38,6 @@ end
 FactoryBot.define do
   factory :stop do
     name Faker::Address.city
-    google_place_id Faker::Lorem.characters(11)
     type "stop"
   end
 end
