@@ -13,13 +13,14 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'users/user_id'
-      resources :users, only: [:index]
-      post '/locations/create_trip', to: 'locations#create_trip'
-      get '/locations/trip/:id', to: 'locations#trip_show'
-      post '/locations/create_start'
-      post '/locations/create_end'
-      post '/locations/create_stop'
-      resources :locations, only: [:index]
+      resources :users, only: [:index, :new]
+    
+      resources :trips
+
+      post '/places/create_start'
+      post '/places/create_end'
+      post '/places/create_stop'
+      resources :locations, only: [:index, :new]
     end
   end
 

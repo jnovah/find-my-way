@@ -1,5 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authenticate
+  protect_from_forgery unless: -> { request.format.json? }
+
   def index
     if current_user
       render json: current_user
@@ -11,6 +13,6 @@ class Api::V1::UsersController < ApplicationController
 
   def user_id
     user = current_user
-    render json: user.id
+    render json: { user_id: user.id}
   end
 end
