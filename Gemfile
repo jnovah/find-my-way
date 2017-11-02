@@ -9,6 +9,7 @@ gem 'webpacker'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem "active_model_serializers"
+gem 'foundation-rails'
 group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'

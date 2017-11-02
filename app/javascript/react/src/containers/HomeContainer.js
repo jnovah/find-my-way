@@ -12,12 +12,14 @@ class Home extends Component {
 
   render() {
     return(
-      <Switch>
-        <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
-        <NavLink to='/newtrip/start'>
-          Plan a new trip!
-      </NavLink>
-    </Switch>
+      <div>
+        <Switch>
+          <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
+          <NavLink to='/newtrip/start'>
+          <button className="btn btn-4 btn-4c add-new">Plan a new trip!</button>
+        </NavLink>
+      </Switch>
+      </div>
   )
   }
 }

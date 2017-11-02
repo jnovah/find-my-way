@@ -70,7 +70,7 @@ class Places extends Component {
             name='name'
             value={this.state.name}
             handleChange={this.handleNameChange}
-          /><br/>
+          />
           <PlacesAutocomplete inputProps={inputProps} />
           <input type='submit' name='Next' />
         </form>

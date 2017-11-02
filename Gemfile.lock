@@ -83,6 +83,9 @@ GEM
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
+    foundation-rails (5.4.5.0)
+      railties (>= 3.1.0)
+      sass (>= 3.2.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashie (3.5.6)
@@ -270,6 +273,7 @@ DEPENDENCIES
   factory_bot
   factory_girl_rails
   faker
+  foundation-rails
   launchy
   listen (~> 3.0.5)
   omniauth-facebook

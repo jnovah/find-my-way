@@ -1,0 +1,69 @@
+
+body {
+  background: url("road.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+input[type=text] {
+  border-radius: 10px;
+  width: 100%;
+  font-size: 40px;
+  height: 65px;
+}
+
+
+.master {
+  color: #FBEBD8;
+}
+
+.hidden {
+  visibility: collapse;
+  height: 1%
+}
+
+.new-trip {
+  background-color: #D8EFFF;
+  margin: auto;
+  padding: 50px;
+  border-radius: 25%;
+}
+
+.add-new:hover {
+  background: rgba(94, 102, 188, 0.5);
+}
+
+.add-new {
+  color: #172804;
+  position: absolute;
+  width: 50%;
+  margin: 10% 10% 25% 25%;
+}
+
+.submit-button {
+  background: rgba(189, 151, 108, 0.8);
+  border-radius: 20px;
+  margin: 0.5% auto;
+  padding: 5% 10%;
+  box-shadow: 0 6px #5E66BC;
+}
+
+.submit-button:active {
+  box-shadow: 0 0 #5E66BC;
+}
+
+.submit-button:hover {
+  box-shadow: 0 8px #5E66BC;
+}
+
+.trip-form {
+  margin-left: 25%;
+  margin-top: 15%;
+  padding: 5% 5%;
+  border-radius: 25px;
+  background-color: rgba(152, 157, 212, 0.5);
+  position: fixed;
+}
+
+.place-list {
+  float: right;
+}
