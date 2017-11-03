@@ -8,7 +8,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem 'foundation-rails'
 gem "active_model_serializers"
+gem 'jquery-rails'
+
 group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'

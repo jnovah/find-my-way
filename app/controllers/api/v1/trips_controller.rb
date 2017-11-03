@@ -4,11 +4,23 @@ class Api::V1::TripsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-
+    user = current_user
+    trips = []
+    user.trips.each do |trip|
+      if trip.start && trip.end
+        trips.push(trip)
+      end
+    end
+    render json: trips
   end
 
   def show
-    render json: Trip.find(params[:id])
+    trip = Trip.find(params[:id])
+    if trip.user == current_user
+      render json: { trip: trip, destinations: { start: trip.start, end: trip.end, stops: trip.stops } }
+    else
+      render json: { error: "You do not have access to this trip" }
+    end
   end
 
   def new
@@ -16,7 +28,7 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def create
-    trip = Trip.new(trip_params)
+    trip = Trip.new(trip_params.merge(user_id: current_user.id))
     if trip.save
       render json: trip
     end
@@ -25,6 +37,6 @@ class Api::V1::TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:user_id, :title, :description, :status)
+    params.require(:trip).permit(:title, :description, :status)
   end
 end

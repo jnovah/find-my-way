@@ -50,7 +50,7 @@ class NewPlacesContainer extends Component {
     })
     return(
       <div>
-        <div>
+        <div className="">
           {place}
         </div>
         <div>

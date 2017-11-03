@@ -10,19 +10,10 @@ class NewTrip extends Component {
     this.state = {
       trip: {},
       places: {},
-      types: { start: false, end: false }
+      types: { start: false, end: false },
+      className: ''
     }
     this.addNewTrip = this.addNewTrip.bind(this)
-  }
-
-  componentDidMount() {
-    fetch('http://localhost:5000/api/v1/users.json', {
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}})
-    .then(response => response.json())
-    .then(body => {
-      this.setState({ userId: body })
-    })
   }
 
   addNewTrip(formPayLoad) {
@@ -34,6 +25,7 @@ class NewTrip extends Component {
     }) .then(response => response.json())
     .then(body => {
       this.setState({ trip: body.trip })
+      this.setState({ className: 'hidden' })
     })
   }
 
@@ -41,24 +33,24 @@ class NewTrip extends Component {
     let view
     let place
     if (this.state.trip.id) {
-      place = <NewPlacesContainer tripId={this.state.trip.id} retrievePlaces={this.state.retrievePlaces} />
-    } else {
-      place = <div>Please Create a New Trip!</div>
+      place = <NewPlacesContainer tripId={this.state.trip.id} />
+    }
+    if (this.state.trip.id) {
+      view = <div className="new-trip-show"><h1>{this.state.trip.title}</h1><div>Description:<br/>{this.state.trip.description}</div></div>
     }
 
     return(
       <div>
-        <div>
+        <div className={`${this.state.className} column small-12`}>
           <Switch>
-            <Route strict path='/newtrip/start' render={props => (<NewTripFormContainer userId={this.props.userId} addNewTrip={this.addNewTrip} {...props} />)} />
+            <Route strict path='/newtrip/start' render={props => (<NewTripFormContainer addNewTrip={this.addNewTrip} {...props} />)} />
           </Switch>
         </div>
-        <div>
-          <h1>{this.state.trip.title}</h1>
-           <div>Description:<br/>{this.state.trip.description}</div>
+        <div className="new-trip-show">
+          {view}
         </div>
-        <div>
-          {place}
+        <div className="">
+            {place}
         </div>
       </div>
     )

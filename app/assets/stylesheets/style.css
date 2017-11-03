@@ -1,0 +1,183 @@
+
+body {
+  background: url("road.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+h1 {
+  color: #EDE2D6;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  text-align: center;
+
+}
+
+.image {
+
+}
+
+.image::after {
+}
+
+input[type=text] {
+  border-radius: 10px;
+  width: 100%;
+  font-size: 20px;
+  height: 65px;
+}
+
+#app {
+  opacity: 1.0;
+}
+
+
+.master {
+  color: #FBEBD8;
+}
+
+.hidden {
+  visibility: collapse;
+  height: 0;
+}
+
+.new-trip {
+  background-color: #B9AA8C;
+  margin: auto;
+  padding: 50px;
+  border-radius: 25%;
+}
+
+.add-new:hover {
+  background: rgba(94, 102, 188, 0.5);
+}
+
+.add-new {
+  color: #172804;
+  position: relative;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-bottom: 0;
+}
+
+.submit-button {
+  background: rgba(189, 151, 108, 0.8);
+  border-radius: 20px;
+  margin: 0.5% auto;
+  padding: 5% 10%;
+  box-shadow: 0 6px #5E66BC;
+}
+
+.submit-button:active {
+  box-shadow: 0 0 #5E66BC;
+}
+
+.submit-button:hover {
+  box-shadow: 0 8px #5E66BC;
+}
+
+.trip-form {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 15px;
+  padding: 5% 5%;
+  border-radius: 25px;
+  background-color: rgba(152, 157, 212, 0.5);
+  opacity: 1.0;
+}
+
+.place-list {
+  float: right;
+}
+
+.index-tile {
+  margin-top: 10px;
+  background-color: rgba(185, 140, 103, 1.0);
+  background-size: contain;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 50px;
+  color: #EDE2D6;
+}
+
+.index-tile:hover {
+  border-style: solid;
+  border: thick double #BAA9DA;
+}
+
+.trips-index {
+  margin-top: 3%;
+  color: #8162BC;
+}
+
+.some-other {
+  margin: 0;
+  padding: 0;
+}
+
+.index-container {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 40px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.locations {
+  text-align: center;
+}
+
+.location.start {
+  margin-top: 10px;
+  border-top-style: solid;
+  border-top: #5E66BC;
+}
+
+.whole-tile {
+  margin-top: 5px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.trip-title {
+  text-align: center;
+}
+
+.trip-description {
+  border-left: black;
+  border-left-style: solid;
+  padding-right: 50px;
+}
+
+.new-trip-show {
+  color: #644833;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.welcome {
+  color: #644833;
+}
+
+.sign-in {
+  color: #644833;
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px
+}
+
+.fa-check-circle {
+  color: green;
+  padding-right: 5px;
+}
+
+.endpoint {
+  border-style: dashed;
+  border-width: medium;
+  padding: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
+}

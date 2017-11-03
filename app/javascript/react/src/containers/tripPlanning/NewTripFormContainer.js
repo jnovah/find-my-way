@@ -7,7 +7,8 @@ class NewTripFormContainer extends Component {
     super(props)
     this.state = {
       title: '',
-      description: ''
+      description: '',
+      className: '',
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -34,12 +35,12 @@ class NewTripFormContainer extends Component {
 
   render() {
     return(
-      <div>
+      <div className={`small-8 medium-12 column trip-form ${this.state.className}`}>
         <form onSubmit={this.handleSubmit}>
           <FormField
             key='title'
             type='text'
-            label='Give your trip a name:'
+            label='Give your trip a name'
             name='title'
             value={this.state.title}
             handleChange={this.handleChange}
@@ -47,14 +48,15 @@ class NewTripFormContainer extends Component {
           <br/>
           <FormField
             key='description'
+            className='trip-description'
             type='text'
-            label='Describe where your are headed and why(optional):'
+            label=''
             name='description'
             value={this.state.description}
             handleChange={this.handleChange}
           />
           <br/>
-          <input type='submit'name='Submit your trip!' />
+          <input className="btn btn-2 btn-2d submit-button" type='submit' value='Continue' />
         </form>
       </div>
     )
