@@ -9,7 +9,6 @@ class NewTripFormContainer extends Component {
       title: '',
       description: '',
       className: '',
-      userId: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -27,17 +26,16 @@ class NewTripFormContainer extends Component {
       formPayLoad = {
         title: this.state.title,
         description: this.state.description,
-        user_id: this.props.userId.user_id,
+        user_id: 1,
         status: 'planning'
       }
-      debugger
     }
     this.props.addNewTrip(formPayLoad)
   }
 
   render() {
     return(
-      <div className={`small-8 column trip-form ${this.state.className}`}>
+      <div className={`small-8 medium-12 column trip-form ${this.state.className}`}>
         <form onSubmit={this.handleSubmit}>
           <FormField
             key='title'
