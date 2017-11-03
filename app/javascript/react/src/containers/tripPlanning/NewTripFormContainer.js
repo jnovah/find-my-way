@@ -30,14 +30,13 @@ class NewTripFormContainer extends Component {
         user_id: this.props.userId.user_id,
         status: 'planning'
       }
-      debugger
     }
     this.props.addNewTrip(formPayLoad)
   }
 
   render() {
     return(
-      <div className={`small-8 column trip-form ${this.state.className}`}>
+      <div className={`small-8 medium-12 column trip-form ${this.state.className}`}>
         <form onSubmit={this.handleSubmit}>
           <FormField
             key='title'

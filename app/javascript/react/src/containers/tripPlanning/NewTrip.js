@@ -46,21 +46,21 @@ class NewTrip extends Component {
       place = <NewPlacesContainer tripId={this.state.trip.id} />
     }
     if (this.state.trip.id) {
-      view = <div className="small-6 cell"><h1>{this.state.trip.title}</h1><div>Description:<br/>{this.state.trip.description}</div></div>
+      view = <div className="new-trip-show"><h1>{this.state.trip.title}</h1><div>Description:<br/>{this.state.trip.description}</div></div>
     }
 
     return(
       <div>
-        <div className={`${this.state.className} small-6 column`}>
+        <div className={`${this.state.className} column small-12`}>
           <Switch>
             <Route strict path='/newtrip/start' render={props => (<NewTripFormContainer userId={this.state.userId} addNewTrip={this.addNewTrip} {...props} />)} />
           </Switch>
         </div>
-        <div className="">
+        <div className="new-trip-show">
           {view}
         </div>
         <div className="">
-          {place}
+            {place}
         </div>
       </div>
     )

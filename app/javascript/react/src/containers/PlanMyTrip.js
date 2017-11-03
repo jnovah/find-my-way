@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, NavLink, Switch } from 'react-router-dom'
 import Home from './HomeContainer'
 
+
 class PlanMyTrip extends Component {
   constructor(props) {
     super(props)
@@ -17,9 +18,11 @@ class PlanMyTrip extends Component {
 
   render() {
     return(
-      <Switch>
-        <Route path='/' component={Home} />
-      </Switch>
+      <div>
+        <Switch>
+          <Route path='/' component={Home} />
+        </Switch>
+      </div>
     )
   }
 }

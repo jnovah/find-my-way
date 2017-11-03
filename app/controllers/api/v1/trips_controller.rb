@@ -4,7 +4,14 @@ class Api::V1::TripsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-
+    user = current_user
+    trips = []
+    user.trips.each do |trip|
+      if trip.start && trip.end
+        trips.push(trip)
+      end
+    end
+    render json: trips
   end
 
   def show

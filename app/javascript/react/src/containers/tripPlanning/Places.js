@@ -19,7 +19,6 @@ class Places extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.formPayLoad = this.formPayLoad.bind(this)
     this.handleFormClear = this.handleFormClear.bind(this)
-    this.handleNameChange = this.handleNameChange.bind(this)
   }
 
   componentDidMount() {
@@ -28,11 +27,6 @@ class Places extends Component {
 
   handleChange(event){
     this.setState({ address: event })
-  }
-
-  handleNameChange(event) {
-    let name = event.target.name
-    this.setState({ [name]: event.target.value })
   }
 
   handleSubmit(event) {
@@ -48,12 +42,15 @@ class Places extends Component {
   }
 
   formPayLoad(coordinates){
-    let payLoad = { address: this.state.address, lat: coordinates.lat, long: coordinates.lng, trip_id:this.props.tripId, name: this.state.name}
+    let payLoad
+    if (this.state.address !== "" && coordinates.lat !== "" && coordinates.lng !== "") {
+      payLoad = { address: this.state.address, lat: coordinates.lat, long: coordinates.lng, trip_id:this.props.tripId, name: this.state.name}
+    }
     return payLoad
   }
 
   handleFormClear() {
-    this.setState({address: '', lat: '', long: '', name: ''})
+    this.setState({address: '', lat: '', long: ''})
   }
 
   render(){
@@ -65,14 +62,8 @@ class Places extends Component {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
-          <FormField
-            label='Give a name for this location:'
-            name='name'
-            value={this.state.name}
-            handleChange={this.handleNameChange}
-          />
           <PlacesAutocomplete inputProps={inputProps} />
-          <input type='submit' name='Next' />
+          <input className="btn btn-2 btn-2d submit-button place-submit" type='submit' name='Next' />
         </form>
       </div>
   )
