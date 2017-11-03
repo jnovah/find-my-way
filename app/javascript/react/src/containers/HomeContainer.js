@@ -26,7 +26,7 @@ class Home extends Component {
     let trips = this.state.trips.map(trip => {
       return(
         <div className='whole-tile small-12'>
-          <TripIndexTile trip={trip} key={trip.id}/>
+          <NavLink to={`/show/${trip.id}/${trip.title}`}><TripIndexTile trip={trip} key={trip.id}/></NavLink>
         </div>
       )
     })
@@ -34,10 +34,7 @@ class Home extends Component {
     return(
       <div className='index-container'>
         <div className=''>
-          <Switch>
-            <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
-            <NavLink to='/newtrip/start'><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
-          </Switch>
+          <NavLink to='/newtrip/start'><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
         </div>
         <div className=''>
           <h1 className='trips-index'>Planned Trips</h1>

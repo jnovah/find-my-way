@@ -16,16 +16,6 @@ class NewTrip extends Component {
     this.addNewTrip = this.addNewTrip.bind(this)
   }
 
-  componentDidMount() {
-    fetch('http://localhost:5000/api/v1/users/user_id.json', {
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}})
-    .then(response => response.json())
-    .then(body => {
-      this.setState({ userId: body })
-    })
-  }
-
   addNewTrip(formPayLoad) {
     fetch('http://localhost:5000/api/v1/trips.json', {
       method: "POST",
@@ -53,7 +43,7 @@ class NewTrip extends Component {
       <div>
         <div className={`${this.state.className} column small-12`}>
           <Switch>
-            <Route strict path='/newtrip/start' render={props => (<NewTripFormContainer userId={this.state.userId} addNewTrip={this.addNewTrip} {...props} />)} />
+            <Route strict path='/newtrip/start' render={props => (<NewTripFormContainer addNewTrip={this.addNewTrip} {...props} />)} />
           </Switch>
         </div>
         <div className="new-trip-show">

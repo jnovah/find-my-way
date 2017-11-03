@@ -9,7 +9,6 @@ class NewTripFormContainer extends Component {
       title: '',
       description: '',
       className: '',
-      userId: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -27,7 +26,7 @@ class NewTripFormContainer extends Component {
       formPayLoad = {
         title: this.state.title,
         description: this.state.description,
-        user_id: this.props.userId.user_id,
+        user_id: 1,
         status: 'planning'
       }
     }
