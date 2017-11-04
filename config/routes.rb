@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       post '/places/start_create'
       post '/places/final_create'
       post '/places/stop_create'
-      resources :places, only: [:show, ]
+      resources :places, only: [:show, :update, :destroy]
     end
   end
 
