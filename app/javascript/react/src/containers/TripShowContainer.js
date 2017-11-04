@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { Switch, Route, NavLink } from 'react-router-dom'
 import TripDestinationTile from '../components/TripDestinationTile'
+import Places from './tripPlanning/Places'
 
 class TripShowContainer extends Component {
   constructor(props) {
@@ -8,6 +10,7 @@ class TripShowContainer extends Component {
       trip: {},
       destinations: {}
     }
+    this.handleStopSubmit = this.handleStopSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -20,6 +23,22 @@ class TripShowContainer extends Component {
       this.setState({ trip: body.trip, destinations: body.destinations })
     })
   }
+
+  handleStopSubmit(payLoad, type) {
+    fetch(`/api/v1/places/${type}_create.json`, {
+      method: "POST",
+      body: JSON.stringify(payLoad),
+      credentials: "same-origin",
+      headers: {"Content-Type": "application/json"}
+    })
+    .then(response => response.json())
+    .then(body => {
+      let currentState = Object.assign({}, this.state.destinations)
+      currentState.stops.push(body.location)
+      this.setState({ destinations: currentState })
+    })
+  }
+  
   render() {
     let destination = Object.keys(this.state.destinations).map((type, index) => {
       return(
@@ -31,6 +50,11 @@ class TripShowContainer extends Component {
         <h1>{this.state.trip.title}</h1>
         <div>{this.state.trip.description}</div>
         <div>{destination}</div>
+        <div>
+          <div>Add a new Pit-Stop</div>
+          <Places tripId={this.state.trip.id} type='stop' addNewPlace={this.handleStopSubmit}/>
+        </div>
+
       </div>
     )
   }

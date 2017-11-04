@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/home')
   get 'home', to: 'home#show'
-  get 'me', to: 'me#show', as: 'me'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'static_files#index'
 
@@ -20,7 +19,7 @@ Rails.application.routes.draw do
       post '/places/start_create'
       post '/places/final_create'
       post '/places/stop_create'
-      resources :locations, only: [:index, :new]
+      resources :places, only: [:show, :update, :destroy]
     end
   end
 

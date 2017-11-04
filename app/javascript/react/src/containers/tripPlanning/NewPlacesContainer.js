@@ -7,15 +7,16 @@ class NewPlacesContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      types: { start: false, final: false, stop: false },
+      types: { start: false, final: false },
       tripId: '',
+      tripTitle: '',
       places: []
     }
     this.addNewPlace = this.addNewPlace.bind(this)
   }
 
   componentDidMount() {
-    this.setState({ tripId: this.props.tripId })
+    this.setState({ tripId: this.props.tripId, tripTitle: this.props.tripTitle })
   }
 
   addNewPlace(payLoad, type) {
@@ -41,7 +42,7 @@ class NewPlacesContainer extends Component {
     } else if (this.state.types.start === true && this.state.types.final === false) {
         placeForm = <Places tripId={this.state.tripId} type='final'placeholder='Add a final destination!' addNewPlace={this.addNewPlace}/>
     } else if (this.state.types.start === true && this.state.types.final === true){
-        placeForm = <Places tripId={this.state.tripId} type='stop' placeholder='Add a pit stop!' addNewPlace={this.addNewPlace}/>
+        placeForm = <NavLink to={`/show/${this.state.tripId}/${this.state.tripTitle}`}><button className='btn btn-4 btn-4c add-new'>Continue</button></NavLink>
     }
     let place = this.state.places.map(place => {
       return(
