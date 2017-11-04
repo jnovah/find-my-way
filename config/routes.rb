@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       get 'users/user_id'
       resources :users, only: [:index, :new]
 
+      patch '/trips/en_route/:id', to: 'trips#en_route#update'
+      get '/trips/get_en_route'
       resources :trips
 
       post '/places/start_create'

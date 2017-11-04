@@ -10,17 +10,22 @@ class PlanMyTrip extends Component {
     super(props)
     this.state = {
     }
+    this.handleEnRoute = this.handleEnRoute.bind(this)
   }
 
   handleChange(event) {
     this.setState({ start: event.target.value })
   }
 
+  handleEnRoute(trip) {
+    this.props.handleEnRoute(trip)
+  }
+
   render() {
     return(
       <div>
         <Switch>
-          <Route path='/show/:id/:title' component={TripShowContainer} />
+          <Route path='/show/:id/:title' render={props =>(<TripShowContainer handleEnRoute={this.handleEnRoute} {...props} />)} />
           <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
           <Route exact path='/' component={Home} />
         </Switch>
