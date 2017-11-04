@@ -44,7 +44,7 @@ class Places extends Component {
   formPayLoad(coordinates){
     let payLoad
     if (this.state.address !== "" && coordinates.lat !== "" && coordinates.lng !== "") {
-      payLoad = { address: this.state.address, lat: coordinates.lat, long: coordinates.lng, trip_id:this.props.tripId, name: this.state.name}
+      payLoad = { address: this.state.address, lat: coordinates.lat, long: coordinates.lng, trip_id:this.props.tripId }
     }
     return payLoad
   }
@@ -62,6 +62,7 @@ class Places extends Component {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
+          <div>Seach for a location below by address or name</div>
           <PlacesAutocomplete inputProps={inputProps} />
           <input className="btn btn-2 btn-2d submit-button place-submit" type='submit' name='Next' />
         </form>

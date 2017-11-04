@@ -7,7 +7,7 @@ class NewPlacesContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      types: { start: false, final: false, stop: false },
+      types: { start: false, final: false },
       tripId: '',
       tripTitle: '',
       places: []
