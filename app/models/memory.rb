@@ -1,7 +1,7 @@
 class Memory < ApplicationRecord
   belongs_to :place
   validates_presence_of :text_body
-  validate :type, presence: true, inclusion: { in: ["photo", "journal"] }
+  validates_presence_of :type, inclusion: { in: ["photo", "journal"] }
 end
 
 class Photo < Memory
