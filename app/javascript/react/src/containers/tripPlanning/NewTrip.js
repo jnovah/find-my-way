@@ -17,7 +17,7 @@ class NewTrip extends Component {
   }
 
   addNewTrip(formPayLoad) {
-    fetch('http://localhost:5000/api/v1/trips.json', {
+    fetch('/api/v1/trips.json', {
       method: "POST",
       body: JSON.stringify(formPayLoad),
       credentials: "same-origin",
@@ -33,7 +33,7 @@ class NewTrip extends Component {
     let view
     let place
     if (this.state.trip.id) {
-      place = <NewPlacesContainer tripId={this.state.trip.id} />
+      place = <NewPlacesContainer tripId={this.state.trip.id} tripTitle={this.state.trip.title} />
     }
     if (this.state.trip.id) {
       view = <div className="new-trip-show"><h1>{this.state.trip.title}</h1><div>Description:<br/>{this.state.trip.description}</div></div>

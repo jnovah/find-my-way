@@ -6,23 +6,30 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/home')
   get 'home', to: 'home#show'
-  get 'me', to: 'me#show', as: 'me'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root 'static_files#index'
 
   namespace :api do
     namespace :v1 do
-      get 'users/user_id'
+      get 'users/user_profile'
       resources :users, only: [:index, :new]
 
+      patch '/trips/en_route/:id', to: 'trips#en_route#update'
+      get '/trips/get_en_route'
+      get '/trips/check_en_route'
       resources :trips
+      resources :trips, only: [:show] do
+        resources :legs, only: [:create]
+      end
 
       post '/places/start_create'
       post '/places/final_create'
       post '/places/stop_create'
-      resources :locations, only: [:index, :new]
+      resources :places, only: [:show, :update, :destroy]
     end
   end
 
   get '*path', to: 'static_files#index'
+
 end
