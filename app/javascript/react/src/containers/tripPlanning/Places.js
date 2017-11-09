@@ -62,7 +62,7 @@ class Places extends Component {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
-          <div>Seach for a location below by address or name</div>
+          <div className="destination">Seach for a location below by address or name</div>
           <PlacesAutocomplete inputProps={inputProps} />
           <input className="btn btn-2 btn-2d submit-button place-submit" type='submit' name='Next' />
         </form>

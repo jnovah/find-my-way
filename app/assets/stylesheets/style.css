@@ -2,19 +2,28 @@
 body {
   background: url("road.jpg") no-repeat center center fixed;
   background-size: cover;
+  width: 100%;
 }
 
 h1 {
-  color: #EDE2D6;
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
+  color: #8162BC;
+  width: 100%;
+  /*margin-left: 25%;*/
+  /*margin-right: 25%;*/
   text-align: center;
+}
 
+.image:before {
 }
 
 .image {
-
+  background: rgba(255, 255, 255, 0.7);
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-size: cover;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .image::after {
@@ -102,9 +111,17 @@ input[type=text] {
   color: #EDE2D6;
 }
 
+.leg-tile {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 10px;
+  float: right;
+  box-shadow: 0px 6px #BAA9DA;
+}
+
 .index-tile:hover {
-  border-style: solid;
-  border: thick double #BAA9DA;
+  box-shadow: 0px 8px #BAA9DA;
 }
 
 .trips-index {
@@ -118,11 +135,6 @@ input[type=text] {
 }
 
 .index-container {
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 40px;
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
 }
 
 .locations {
@@ -180,4 +192,41 @@ input[type=text] {
   border-width: medium;
   padding: 10px 10px 10px 10px;
   margin: 10px 10px 10px 10px;
+}
+
+.profile_picture {
+  float: right;
+  height: 10%;
+  width: 10%;
+}
+
+.top-bar {
+  max-width: 1300px;
+  width: 100%;
+  height: inherit;
+  position: static;
+}
+
+.name {
+  float: right;
+}
+
+.destination {
+  color: black;
+  opacity: 1.0;
+  margin-top: 5px;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.add-pic {
+
+}
+
+.current-text {
+  position: static;
+}
+
+.index-text:hover {
+  height: inherit;
 }

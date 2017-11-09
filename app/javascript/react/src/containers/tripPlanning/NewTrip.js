@@ -17,7 +17,7 @@ class NewTrip extends Component {
   }
 
   addNewTrip(formPayLoad) {
-    fetch('http://localhost:5000/api/v1/trips.json', {
+    fetch('/api/v1/trips.json', {
       method: "POST",
       body: JSON.stringify(formPayLoad),
       credentials: "same-origin",

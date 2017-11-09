@@ -11,6 +11,7 @@ class TripShowContainer extends Component {
       destinations: {}
     }
     this.handleStopSubmit = this.handleStopSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -38,7 +39,18 @@ class TripShowContainer extends Component {
       this.setState({ destinations: currentState })
     })
   }
-  
+
+  handleClick() {
+    fetch(`/api/v1/trips/en_route/${this.state.trip.id}.json`, {
+      method: "PATCH",
+      credentials: "same-origin",
+      headers: {"Content-Type": "application/json"}
+    }) .then(response => response.json())
+    .then(body => {
+      this.props.handleEnRoute(body)
+    })
+  }
+
   render() {
     let destination = Object.keys(this.state.destinations).map((type, index) => {
       return(
@@ -48,10 +60,11 @@ class TripShowContainer extends Component {
     return(
       <div>
         <h1>{this.state.trip.title}</h1>
-        <div>{this.state.trip.description}</div>
+        <div className="destination">{this.state.trip.description}</div>
+        <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Start Trip</button>
         <div>{destination}</div>
         <div>
-          <div>Add a new Pit-Stop</div>
+          <div className="destination">Add a new Pit-Stop</div>
           <Places tripId={this.state.trip.id} type='stop' addNewPlace={this.handleStopSubmit}/>
         </div>
 
