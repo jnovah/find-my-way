@@ -1393,7 +1393,7 @@
 	animation: shake 0.5s;
 }
 
-/* From Dan Eden's animate.css: http://daneden.me/animate/ */
+/* From Dan Eden's animate.css: https://daneden.me/animate/ */
 @-webkit-keyframes shake {
 	0%, 100% {-webkit-transform: translateX(0);}
 	10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
