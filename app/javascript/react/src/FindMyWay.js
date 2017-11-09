@@ -8,25 +8,26 @@ class FindMyWay extends Component {
     super(props)
     this.state = {
       enRoute: false,
-      trip: []
+      trip: {},
+      routes: []
     }
     this.handleEnRoute = this.handleEnRoute.bind(this)
   }
 
   componentDidMount() {
-    fetch('api/v1/trips/get_en_route.json', {
+    fetch('/api/v1/trips/check_en_route.json', {
       credentials: "same-origin",
       headers: {"Content-Type": "application/json"}
     }) .then(response => response.json())
     .then(body => {
-      if (body.trip.length === 1) {
-        this.setState({ enRoute: true, trip: body.trip })
+      if (body.en_route) {
+        this.setState({ enRoute: true })
       }
     })
   }
 
-  handleEnRoute(trip) {
-    this.setState({ enRoute: true, trip: [...this.state.trip, trip] })
+  handleEnRoute() {
+    this.setState({ enRoute: true })
   }
 
   render(){

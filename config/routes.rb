@@ -7,16 +7,21 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/home')
   get 'home', to: 'home#show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root 'static_files#index'
 
   namespace :api do
     namespace :v1 do
-      get 'users/user_id'
+      get 'users/user_profile'
       resources :users, only: [:index, :new]
 
       patch '/trips/en_route/:id', to: 'trips#en_route#update'
       get '/trips/get_en_route'
+      get '/trips/check_en_route'
       resources :trips
+      resources :trips, only: [:show] do
+        resources :legs, only: [:create]
+      end
 
       post '/places/start_create'
       post '/places/final_create'
@@ -26,4 +31,5 @@ Rails.application.routes.draw do
   end
 
   get '*path', to: 'static_files#index'
+
 end

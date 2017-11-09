@@ -11,8 +11,8 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def user_id
+  def user_profile
     user = current_user
-    render json: { user_id: user.id}
+    render json: { user_profile: { first_name: user.first_name, picture: user.picture } }
   end
 end

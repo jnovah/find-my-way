@@ -34,12 +34,22 @@ class Api::V1::TripsController < ApplicationController
     end
   end
 
-  def get_en_route
-    if user_trips.en_route.length == 0
-      render json: {trip: []}
+  def check_en_route
+    if trip = Trip.find_by(status: 'en route', user_id: current_user.id)
+      render json: { en_route: true }
     else
-      render json: { trip: user_trips.en_route }
+      render json: { en_route: false }
     end
+  end
+
+  def get_en_route
+    trip = Trip.find_by(status: 'en route', user_id: current_user.id)
+    legs = trip.legs
+    routes = []
+    legs.each do |leg|
+      routes << { leg: leg, origin: leg.origin, destination: leg.destination }
+    end
+    render json: { trip: trip, routes: routes }
   end
 
   def en_route
@@ -47,7 +57,7 @@ class Api::V1::TripsController < ApplicationController
     trip = Trip.find(params[:id])
     if user.trips.en_route.length == 0
       trip.update(status: 'en route')
-      render json: trip
+      render json: { trip: trip, start: trip.start, end: trip.end, stops: trip.stops }
     else
       render json: { error: "You can only be on one trip at a time" }
     end
@@ -55,11 +65,6 @@ class Api::V1::TripsController < ApplicationController
 
   private
 
-  def user_trips
-    user = current_user
-    trips = user.trips
-    return trips
-  end
 
   def trip_params
     params.require(:trip).permit(:title, :description, :status)
