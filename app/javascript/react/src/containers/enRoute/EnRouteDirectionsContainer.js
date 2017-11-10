@@ -48,7 +48,7 @@ class EnRouteDirectionsConatainer extends Component {
   render() {
     let tripComplete
     if (this.state.tripComplete) {
-      tripComplete = <button onClick={this.handleClick}>This trip is complete!</button>
+      tripComplete = <div className='leg-complete'><button onClick={this.handleClick}>This trip is complete!</button></div>
     }
     let legTile = this.state.routes.map((leg, index) => {
       return(
@@ -57,7 +57,7 @@ class EnRouteDirectionsConatainer extends Component {
     })
     return(
       <div>
-        <div className='image'>
+        <div className='image leg-list'>
           <h1 className='column small-12'>{this.state.trip.title}</h1>
           <div className='destination column small-12'>{this.state.trip.description}</div>
           {legTile}

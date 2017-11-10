@@ -13,8 +13,6 @@ h1 {
   text-align: center;
 }
 
-.image:before {
-}
 
 .image {
   background: rgba(255, 255, 255, 0.7);
@@ -23,11 +21,9 @@ h1 {
   margin-right: 10%;
   background-size: cover;
   height: 100%;
-  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.image::after {
-}
 
 input[type=text] {
   border-radius: 10px;
@@ -72,9 +68,6 @@ input[type=text] {
 
 .submit-button {
   background: rgba(189, 151, 108, 0.8);
-  border-radius: 20px;
-  margin: 0.5% auto;
-  padding: 5% 10%;
   box-shadow: 0 6px #5E66BC;
 }
 
@@ -229,4 +222,62 @@ input[type=text] {
 
 .index-text:hover {
   height: inherit;
+}
+
+.places-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.places-form {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+.places-ac {
+  width: 100%;
+}
+
+.stop-border {
+  width: 80%;
+  border-top: thin solid black;
+  display: flex;
+  align-items: center;
+}
+
+.destination-container {
+  display: flex;
+  align-items: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.leg-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leg-complete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.place-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-plan-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: black;
+  width: 100%;
+}
+
+.continue {
+  width: auto;
 }

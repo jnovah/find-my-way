@@ -49,7 +49,7 @@ class Api::V1::TripsController < ApplicationController
     legs = trip.legs
     routes = []
     count = 0
-    legs.each do |leg|
+    legs.order(:order).each do |leg|
       routes << { leg: leg, origin: leg.origin, destination: leg.destination }
       if leg["complete"]
         count += 1

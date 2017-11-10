@@ -62,7 +62,8 @@ class TripShowContainer extends Component {
         <h1>{this.state.trip.title}</h1>
         <div className="destination">{this.state.trip.description}</div>
         <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Start Trip</button>
-        <div>{destination}</div>
+        <div className='destination-container row'>{destination}</div>
+
         <div>
           <div className="destination">Add a new Pit-Stop</div>
           <Places tripId={this.state.trip.id} type='stop' addNewPlace={this.handleStopSubmit}/>

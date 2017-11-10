@@ -5,12 +5,20 @@ class Api::V1::LegsController < ApplicationController
 
   def create
     legs = leg_params[:legs]
-    trip = Trip.find(leg_params[:legs][0][:trip_id])
-    if trip.legs.length == 0
+    if leg_params[:legs][0] == nil
+      trip = Trip.find(leg_params[:legs][:trip_id])
+    else
+      trip = Trip.find(leg_params[:legs][0][:trip_id])
+    end
+    if trip.legs.length == 0 && leg_params[:legs][0] != nil
       legs.each do |leg|
+        binding.pry
         object = Leg.new(leg)
         object.save
       end
+    else
+      object = Leg.new(legs)
+      object.save
     end
   end
 
@@ -35,7 +43,8 @@ class Api::V1::LegsController < ApplicationController
 
   def build_routes
     routes = []
-    Trip.find(params[:trip_id]).legs.each do |leg|
+    legs = Trip.find(params[:trip_id]).legs
+    legs.order(:order).each do |leg|
       routes << {leg: leg, origin: leg.origin, destination: leg.destination}
     end
     return routes

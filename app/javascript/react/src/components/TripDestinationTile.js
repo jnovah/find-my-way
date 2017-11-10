@@ -19,7 +19,7 @@ const TripDestinationTile = props => {
     address = <ul>{entry}</ul>
   }
   return(
-    <div className="destination">{label}:<br/>{address}</div>
+    <div className="destination column small-4">{label}:<br/>{address}</div>
   )
 }
 

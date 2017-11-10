@@ -42,7 +42,7 @@ class NewPlacesContainer extends Component {
     } else if (this.state.types.start === true && this.state.types.final === false) {
         placeForm = <Places tripId={this.state.tripId} type='final'placeholder='Add a final destination!' addNewPlace={this.addNewPlace}/>
     } else if (this.state.types.start === true && this.state.types.final === true){
-        placeForm = <NavLink to={`/show/${this.state.tripId}/${this.state.tripTitle}`}><button className='btn btn-4 btn-4c add-new'>Continue</button></NavLink>
+        placeForm = <NavLink to={`/show/${this.state.tripId}/${this.state.tripTitle}`}><button className='btn btn-4 btn-4c add-new continue'>Continue</button></NavLink>
     }
     let place = this.state.places.map(place => {
       return(
@@ -50,8 +50,8 @@ class NewPlacesContainer extends Component {
       )
     })
     return(
-      <div>
-        <div className="">
+      <div className="places-form-container">
+        <div className="trip-plan-container">
           {place}
         </div>
         <div>

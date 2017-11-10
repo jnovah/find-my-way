@@ -45,7 +45,13 @@ class PlanMyTrip extends Component {
         return({ trip_id: trip.trip.id, origin_id: trip.stops[waypoint].id, destination_id: trip.stops[waypoint+1].id, current: false, order: index+2})
       }
     })
-    let legPayLoad = [].concat.apply([], nestedPayLoad)
+    let legPayLoad
+    if (waypointOrder.length > 0) {
+      legPayLoad = [].concat.apply([], nestedPayLoad)
+    } else if (waypointOrder.length === 0) {
+      debugger
+      legPayLoad = { trip_id: trip.trip.id, origin_id: trip.start.id, destination_id: trip.end.id , current: true, order: 1}
+    }
     return { legs: legPayLoad }
   }
 
