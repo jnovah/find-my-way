@@ -8,8 +8,11 @@ class EnRouteDirectionsConatainer extends Component {
     this.state = {
       directions: {},
       trip: {},
-      routes: []
+      routes: [],
+      tripComplete: false
     }
+    this.handleComplete = this.handleComplete.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentWillMount() {
@@ -18,15 +21,38 @@ class EnRouteDirectionsConatainer extends Component {
       headers: {"Content-Type": "application/json"}
     }) .then(response => response.json())
     .then(body => {
-      this.setState({ trip: body.trip, routes: body.routes })
+      this.setState({ trip: body.trip, routes: body.routes, tripComplete: body.trip_complete })
     })
   }
 
+  handleComplete(legId) {
+    fetch(`/api/v1/trips/${this.state.trip.id}/legs/${legId}`, {
+      method: 'PATCH',
+      credentials: "same-origin",
+      headers: {"Content-Type": "application/json"}
+    }) .then(response => response.json())
+    .then(body => {
+      if (body.routes && !body.trip_complete) {
+        this.setState({ routes: body.routes })
+      } else if (body.trip_complete) {
+        this.setState({ tripComplete: true, routes: body.routes })
+      }
+    })
+  }
+
+  handleClick() {
+    this.props.tripComplete(this.state.trip.id)
+    this.props.history.push('/')
+  }
 
   render() {
+    let tripComplete
+    if (this.state.tripComplete) {
+      tripComplete = <button onClick={this.handleClick}>This trip is complete!</button>
+    }
     let legTile = this.state.routes.map((leg, index) => {
       return(
-        <LegIndexTile leg={leg} key={`enR${index}`}/>
+        <LegIndexTile leg={leg} handleComplete={this.handleComplete} key={`enR${index}`}/>
       )
     })
     return(
@@ -36,6 +62,7 @@ class EnRouteDirectionsConatainer extends Component {
           <div className='destination column small-12'>{this.state.trip.description}</div>
           {legTile}
         </div>
+        {tripComplete}
       </div>
     )
   }

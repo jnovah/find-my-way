@@ -15,12 +15,13 @@ Rails.application.routes.draw do
       get 'users/user_profile'
       resources :users, only: [:index, :new]
 
-      patch '/trips/en_route/:id', to: 'trips#en_route#update'
-      get '/trips/get_en_route'
       get '/trips/check_en_route'
+      get '/trips/get_en_route'
+      patch '/trips/en_route/:id', to: 'trips#en_route#update'
+      patch '/trips/complete/:id', to: 'trips#complete#update'
       resources :trips
       resources :trips, only: [:show] do
-        resources :legs, only: [:create]
+        resources :legs, only: [:create, :update]
       end
 
       post '/places/start_create'
