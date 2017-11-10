@@ -60,10 +60,10 @@ class Places extends Component {
       placeholder: this.props.placeholder
     }
     return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="destination">Seach for a location below by address or name</div>
-          <PlacesAutocomplete inputProps={inputProps} />
+      <div className= "places-form-container">
+        <div className="destination">Seach for a location below by address or name</div>
+        <form className='places-form' onSubmit={this.handleSubmit}>
+          <div className='places-ac'><PlacesAutocomplete inputProps={inputProps} /></div>
           <input className="btn btn-2 btn-2d submit-button place-submit" type='submit' name='Next' />
         </form>
       </div>
