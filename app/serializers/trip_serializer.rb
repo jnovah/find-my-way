@@ -1,4 +1,4 @@
 class TripSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :start, :end
+  attributes :id, :title, :description, :start, :end, :status
 
 end

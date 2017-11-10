@@ -23,8 +23,10 @@ class Api::V1::TripsController < ApplicationController
     end
   end
 
-  def new
-
+  def complete
+    trip = Trip.find(params[:id])
+    trip.update(status: "completed")
+    render json: {status: "complete"}
   end
 
   def create
@@ -46,10 +48,18 @@ class Api::V1::TripsController < ApplicationController
     trip = Trip.find_by(status: 'en route', user_id: current_user.id)
     legs = trip.legs
     routes = []
+    count = 0
     legs.each do |leg|
       routes << { leg: leg, origin: leg.origin, destination: leg.destination }
+      if leg["complete"]
+        count += 1
+      end
     end
-    render json: { trip: trip, routes: routes }
+    if count < routes.length
+      render json: { trip: trip, routes: routes, trip_complete: false }
+    elsif count == routes.length
+      render json: { trip: trip, routes: routes, trip_complete: true }
+    end
   end
 
   def en_route

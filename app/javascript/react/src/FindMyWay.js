@@ -12,6 +12,7 @@ class FindMyWay extends Component {
       routes: []
     }
     this.handleEnRoute = this.handleEnRoute.bind(this)
+    this.handleTripComplete = this.handleTripComplete.bind(this)
   }
 
   componentDidMount() {
@@ -26,6 +27,10 @@ class FindMyWay extends Component {
     })
   }
 
+  handleTripComplete() {
+    this.setState({ enRoute: false })
+  }
+
   handleEnRoute() {
     this.setState({ enRoute: true })
   }
@@ -33,12 +38,12 @@ class FindMyWay extends Component {
   render(){
     let renderComponent
     if (this.state.enRoute) {
-      renderComponent = <BrowserRouter><EnRoute trip={this.state.trip} /></BrowserRouter>
+      renderComponent = <BrowserRouter><EnRoute trip={this.state.trip} handleTripComplete={this.handleTripComplete} /></BrowserRouter>
     } else {
       renderComponent = <BrowserRouter><PlanMyTrip handleEnRoute={this.handleEnRoute} /></BrowserRouter>
     }
     return(
-      <div className="row">
+      <div className="">
         {renderComponent}
       </div>
     )
