@@ -50,22 +50,25 @@ class Home extends Component {
 
     return(
       <div className='index-container'>
-        <div className=''>
+        <div className='new-trip-button'>
           <NavLink to='/newtrip/start'><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
         </div>
-        <div className=''>
-          <h1 className='trips-index'>Completed Trips</h1>
-          <div className='row'>
-            {completedTrips}
+        <div className='trip-types'>
+          <div className='trips-index-container'>
+            <h1 className='trips-index'>Completed Trips</h1>
+            <div className='row'>
+              {completedTrips}
+            </div>
           </div>
-          <h1 className='trips-index'>Planned Trips</h1>
-          <div className='row'>
-            {tripsInPlanning}
+          <div className='trips-index-container'>
+            <h1 className='trips-index'>Planned Trips</h1>
+            <div className='row'>
+              {tripsInPlanning}
+            </div>
           </div>
-
         </div>
       </div>
-  )
+    )
   }
 }
 
