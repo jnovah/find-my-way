@@ -52,19 +52,25 @@ class TripShowContainer extends Component {
   }
 
   render() {
+    let className
     let destination = Object.keys(this.state.destinations).map((type, index) => {
       return(
         <TripDestinationTile type={type} location={this.state.destinations[type]} key={`dest${index}`}/>
       )
     })
+    if (this.state.trip.status === 'completed') {
+      className = 'hidden'
+    }
     return(
       <div>
         <h1>{this.state.trip.title}</h1>
         <div className="destination">{this.state.trip.description}</div>
-        <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Start Trip</button>
+        <div className={`${className} start-trip-button `}>
+          <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Start Trip</button>
+        </div>
         <div className='destination-container row'>{destination}</div>
 
-        <div>
+        <div className={className}>
           <div className="destination">Add a new Pit-Stop</div>
           <Places tripId={this.state.trip.id} type='stop' addNewPlace={this.handleStopSubmit}/>
         </div>

@@ -8,8 +8,6 @@ body {
 h1 {
   color: #8162BC;
   width: 100%;
-  /*margin-left: 25%;*/
-  /*margin-right: 25%;*/
   text-align: center;
 }
 
@@ -20,7 +18,7 @@ h1 {
   margin-left: 10%;
   margin-right: 10%;
   background-size: cover;
-  height: 100%;
+  height: 200rem;
   overflow-x: hidden;
 }
 
@@ -59,10 +57,9 @@ input[type=text] {
 
 .add-new {
   color: #172804;
+  background: rgba(189, 151, 108, 1.0);
   position: relative;
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
+  justify-content: center;
   margin-bottom: 0;
 }
 
@@ -95,6 +92,8 @@ input[type=text] {
 }
 
 .index-tile {
+  display: flex;
+  flex-direction: column;
   margin-top: 10px;
   background-color: rgba(185, 140, 103, 1.0);
   background-size: contain;
@@ -104,6 +103,13 @@ input[type=text] {
   color: #EDE2D6;
 }
 
+.trip-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
 .leg-tile {
   width: 80%;
   margin-left: 10%;
@@ -111,6 +117,13 @@ input[type=text] {
   margin-bottom: 10px;
   float: right;
   box-shadow: 0px 6px #BAA9DA;
+  margin-top: 10px;
+  background-color: rgba(185, 140, 103, 1.0);
+  background-size: contain;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 50px;
+  color: #EDE2D6;
 }
 
 .index-tile:hover {
@@ -128,6 +141,10 @@ input[type=text] {
 }
 
 .index-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5%;
 }
 
 .locations {
@@ -189,12 +206,11 @@ input[type=text] {
 
 .profile_picture {
   float: right;
-  height: 10%;
-  width: 10%;
+  height: auto;
+  width: 5%;
 }
 
 .top-bar {
-  max-width: 1300px;
   width: 100%;
   height: inherit;
   position: static;
@@ -280,4 +296,21 @@ input[type=text] {
 
 .continue {
   width: auto;
+}
+
+.trip-types {
+  display: flex;
+  justify-content: center;
+  margin-right: 10%;
+}
+
+.new-trip-button {
+  display: flex;
+  justify-content: center;
+}
+
+.start-trip-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

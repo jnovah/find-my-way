@@ -26,7 +26,7 @@ class LegIndexTile extends Component {
     }
 
     return(
-      <div className={`leg-tile destination column small-12 end index-tile ${className}`}>
+      <div className={`leg-tile destination column small-12 end ${className}`}>
         <div>Leg: {this.props.leg.leg.order}</div>
         <div className='column small-6'>Starting Location:<br/> {this.props.leg.origin.address}</div>
         <div className='column small-6 index-text'>Final Destination:<br/> {this.props.leg.destination.address}</div>

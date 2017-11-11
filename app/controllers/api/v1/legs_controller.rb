@@ -12,7 +12,6 @@ class Api::V1::LegsController < ApplicationController
     end
     if trip.legs.length == 0 && leg_params[:legs][0] != nil
       legs.each do |leg|
-        binding.pry
         object = Leg.new(leg)
         object.save
       end
