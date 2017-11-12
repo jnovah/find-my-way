@@ -59,6 +59,7 @@ class Places extends Component {
       onChange: this.handleChange,
       placeholder: this.props.placeholder
     }
+    
     return(
       <div className= "places-form-container">
         <div className="destination">Seach for a location below by address or name</div>

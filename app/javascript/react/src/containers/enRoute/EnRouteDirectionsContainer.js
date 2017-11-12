@@ -48,7 +48,7 @@ class EnRouteDirectionsConatainer extends Component {
   render() {
     let tripComplete
     if (this.state.tripComplete) {
-      tripComplete = <div className='leg-complete'><button onClick={this.handleClick}>This trip is complete!</button></div>
+      tripComplete = <div className='leg-complete'><button className='depth' onClick={this.handleClick}>This trip is complete!</button></div>
     }
     let legTile = this.state.routes.map((leg, index) => {
       return(

@@ -49,7 +49,6 @@ class PlanMyTrip extends Component {
     if (waypointOrder.length > 0) {
       legPayLoad = [].concat.apply([], nestedPayLoad)
     } else if (waypointOrder.length === 0) {
-      debugger
       legPayLoad = { trip_id: trip.trip.id, origin_id: trip.start.id, destination_id: trip.end.id , current: true, order: 1}
     }
     return { legs: legPayLoad }
@@ -72,7 +71,7 @@ class PlanMyTrip extends Component {
           <Switch>
             <Route path='/show/:id/:title' render={props =>(<TripShowContainer handleEnRoute={this.handleEnRoute} {...props} />)} />
             <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
-            <Route exact path='/' component={Home} />
+            <Route path='/' component={Home} />
           </Switch>
         </div>
       </div>

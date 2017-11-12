@@ -1,6 +1,6 @@
 
 body {
-  background: url("road.jpg") no-repeat center center fixed;
+  background: url("cameron-kirby-74957.jpg") no-repeat center center fixed;
   background-size: cover;
   width: 100%;
 }
@@ -18,8 +18,11 @@ h1 {
   margin-left: 10%;
   margin-right: 10%;
   background-size: cover;
-  height: 200rem;
+  height: auto;
   overflow-x: hidden;
+  padding-bottom: 3%;
+  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 40px;
 }
 
 
@@ -61,11 +64,20 @@ input[type=text] {
   position: relative;
   justify-content: center;
   margin-bottom: 0;
+  box-shadow:
+    0 1px 2px gray,
+    0 -1px 1px gray,
+    inset 0 -1px 1px rgba(0,0,0,0.5),
+    inset 0 1px 1px rgba(255,255,255,0.8);
 }
 
 .submit-button {
   background: rgba(189, 151, 108, 0.8);
-  box-shadow: 0 6px #5E66BC;
+  box-shadow:
+    0 1px 2px #5E66BC,
+    0 -1px 1px #5E66BC,
+    inset 0 -1px 1px rgba(0,0,0,0.5),
+    inset 0 1px 1px rgba(255,255,255,0.8);
 }
 
 .submit-button:active {
@@ -73,7 +85,11 @@ input[type=text] {
 }
 
 .submit-button:hover {
-  box-shadow: 0 8px #5E66BC;
+  box-shadow:
+    0 1px 2px #5E66BC,
+    0 -2px 1px #5E66BC,
+    inset 0 -2px 1px rgba(0,0,0,0.5),
+    inset 0 1px 1px rgba(255,255,255,0.8);
 }
 
 .trip-form {
@@ -85,6 +101,11 @@ input[type=text] {
   border-radius: 25px;
   background-color: rgba(152, 157, 212, 0.5);
   opacity: 1.0;
+  box-shadow:
+    0 1px 2px gray,
+    0 -1px 1px gray,
+    inset 0 -1px 1px rgba(0,0,0,0.5),
+    inset 0 1px 1px rgba(255,255,255,0.8);
 }
 
 .place-list {
@@ -101,6 +122,11 @@ input[type=text] {
   overflow-x: auto;
   border-radius: 50px;
   color: #EDE2D6;
+  box-shadow:
+    0 1px 2px gray,
+    0 -1px 1px gray,
+    inset 0 -1px 1px rgba(0,0,0,0.5),
+    inset 0 1px 1px rgba(255,255,255,0.8);
 }
 
 .trip-details {
@@ -127,12 +153,29 @@ input[type=text] {
 }
 
 .index-tile:hover {
-  box-shadow: 0px 8px #BAA9DA;
+  box-shadow:
+    0 1px 2px gray,
+    0 -2px 1px gray,
+    inset 0 -2px 1px rgba(0,0,0,0.5),
+    inset 0 1px 1px rgba(255,255,255,0.8);
 }
 
 .trips-index {
   margin-top: 3%;
   color: #8162BC;
+}
+
+.trips-index-container {
+  border-style: dashed;
+  border-width: thin;
+  border-top-color: gray;
+  border-left-color: gray;
+  border-right-color: gray;
+  border-bottom-style: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  background-color:
 }
 
 .some-other {
@@ -143,7 +186,7 @@ input[type=text] {
 .index-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 5%;
 }
 
@@ -159,7 +202,8 @@ input[type=text] {
 
 .whole-tile {
   margin-top: 5px;
-  width: 80%;
+  width: auto;
+  height: auto;
   margin-left: 10%;
   margin-right: 10%;
 }
@@ -214,10 +258,13 @@ input[type=text] {
   width: 100%;
   height: inherit;
   position: static;
+  position: flex;
+  align-items: center;
 }
 
 .name {
   float: right;
+  text-align: right;
 }
 
 .destination {
@@ -300,8 +347,9 @@ input[type=text] {
 
 .trip-types {
   display: flex;
-  justify-content: center;
-  margin-right: 10%;
+  justify-content: space-between;
+  margin-right: 15%;
+  margin-left: 15%;
 }
 
 .new-trip-button {
@@ -313,4 +361,30 @@ input[type=text] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.home-link:hover {
+  color: beige;
+}
+
+.container-index {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.trips-index-container:active {
+  background-color: rgba(185, 140, 103, 1.0);
+}
+
+.trips-index-container:visited {
+  background-color: rgba(185, 140, 103, 1.0);
+}
+
+.depth {
+  box-shadow:
+    0 1px 2px gray,
+    0 -1px 1px gray,
+    inset 0 -1px 1px rgba(0,0,0,0.5),
+    inset 0 1px 1px rgba(255,255,255,0.8);
 }
