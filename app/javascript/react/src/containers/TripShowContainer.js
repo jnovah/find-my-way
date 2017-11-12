@@ -63,15 +63,16 @@ class TripShowContainer extends Component {
     }
     return(
       <div>
-        <h1>{this.state.trip.title}</h1>
-        <div className="destination">{this.state.trip.description}</div>
-        <div className={`${className} start-trip-button `}>
-          <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Start Trip</button>
+        <div className='image'>
+          <h1>{this.state.trip.title}</h1>
+          <div className="destination">{this.state.trip.description}</div>
+          <div className={`${className} start-trip-button `}>
+            <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Start Trip</button>
+          </div>
+          <div className='destination-container row'>{destination}</div>
         </div>
-        <div className='destination-container row'>{destination}</div>
-
         <div className={className}>
-          <div className="destination">Add a new Pit-Stop</div>
+          <div className="destination place">Add a new Pit-Stop</div>
           <Places tripId={this.state.trip.id} type='stop' addNewPlace={this.handleStopSubmit}/>
         </div>
 
