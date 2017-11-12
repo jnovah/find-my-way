@@ -18,7 +18,7 @@ class LegIndexTile extends Component {
     if (this.props.leg.leg.current) {
       className = 'current'
       current = <div className='current-text column small-12'>Current Leg</div>
-      completeButton = <button onClick={this.handleClick}>Leg Complete</button>
+      completeButton = <button className='depth' onClick={this.handleClick}>Leg Complete</button>
     } else if (this.props.leg.leg.complete) {
       complete = <div className='current-text column small-12'>Leg Complete</div>
     } else {
@@ -26,7 +26,7 @@ class LegIndexTile extends Component {
     }
 
     return(
-      <div className={`leg-tile destination column small-12 end ${className}`}>
+      <div className={`leg-tile destination column small-12 end depth ${className}`}>
         <div>Leg: {this.props.leg.leg.order}</div>
         <div className='column small-6'>Starting Location:<br/> {this.props.leg.origin.address}</div>
         <div className='column small-6 index-text'>Final Destination:<br/> {this.props.leg.destination.address}</div>

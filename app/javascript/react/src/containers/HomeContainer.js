@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink, Switch, Route } from 'react-router-dom'
 import TripIndexTile from '../components/TripIndexTile'
 import NewTrip from './tripPlanning/NewTrip'
-
+import IndexContainer from './IndexContainer'
 
 class Home extends Component {
   constructor(props) {
@@ -33,39 +33,24 @@ class Home extends Component {
   }
 
   render() {
-    let tripsInPlanning = this.state.tripsInPlanning.map(trip => {
-      return(
-        <div className='whole-tile small-12'>
-          <NavLink to={`/show/${trip.id}/${trip.title}`}><TripIndexTile trip={trip} key={trip.id}/></NavLink>
-        </div>
-      )
-    })
-    let completedTrips = this.state.completedTrips.map(trip => {
-      return(
-        <div className='whole-tile small-12'>
-          <NavLink to={`/show/${trip.id}/${trip.title}`}><TripIndexTile trip={trip} key={trip.id}/></NavLink>
-        </div>
-      )
-    })
-
     return(
       <div className='index-container'>
         <div className='new-trip-button'>
           <NavLink to='/newtrip/start'><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
         </div>
         <div className='trip-types'>
-          <div className='trips-index-container'>
-            <h1 className='trips-index'>Completed Trips</h1>
-            <div className='row'>
-              {completedTrips}
-            </div>
+          <div className='trips-index-container depth'>
+            <NavLink to='/trips-in-planning/'><h1 className='trips-index'>Trips in Planning</h1></NavLink>
           </div>
-          <div className='trips-index-container'>
-            <h1 className='trips-index'>Planned Trips</h1>
-            <div className='row'>
-              {tripsInPlanning}
-            </div>
+          <div className='trips-index-container depth'>
+            <NavLink to='/completed-trips/'><h1 className='trips-index'>Completed Trips</h1></NavLink>
           </div>
+        </div>
+        <div>
+          <Switch>
+            <Route strict path='/completed-trips/' render={props => (<IndexContainer trips={this.state.completedTrips} {...props} />)}/>
+            <Route strict path='/trips-in-planning/' render={props => (<IndexContainer trips={this.state.tripsInPlanning} {...props} />)}/>
+          </Switch>
         </div>
       </div>
     )

@@ -27,10 +27,9 @@ class EnRoute extends Component {
     return(
       <div>
         <TopBar script='En Route'/>
-        <h1>Happy Travels!</h1>
         <Switch>
           <Route path='/en+route' render={props => (<EnRouteDirectionsContainer tripComplete={this.tripComplete} {...props} />)} />
-          <NavLink to='/en+route'><button className='btn btn-4 btn-4c add-new'>View Trip Details</button></NavLink>
+          <div className='trip-details'><NavLink to='/en+route'><button className='btn btn-4 btn-4c add-new'>View Trip Details</button></NavLink></div>
         </Switch>
       </div>
     )

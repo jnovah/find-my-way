@@ -39,3 +39,6 @@ Acceptance Criteria
 *Pictures and "journal" entries can be added to the association with each location
 *A "scapbook" (show page) is available for view by location stopped
 *User has access to a time-line of the trip
+
+Photo by Cameron Kirby on Unsplash
+Photo by Aldric RIVAT on Unsplash
