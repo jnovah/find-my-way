@@ -41,13 +41,15 @@ class NewTrip extends Component {
 
     return(
       <div>
-        <div className={`${this.state.className} column small-12`}>
-          <Switch>
-            <Route strict path='/newtrip/start' render={props => (<NewTripFormContainer addNewTrip={this.addNewTrip} {...props} />)} />
-          </Switch>
-        </div>
-        <div className="new-trip-show">
-          {view}
+        <div className='image mod'>
+          <div className={`${this.state.className} column small-12`}>
+            <Switch>
+              <Route strict path='/newtrip/start' render={props => (<NewTripFormContainer addNewTrip={this.addNewTrip} {...props} />)} />
+            </Switch>
+          </div>
+          <div className="new-trip-show">
+            {view}
+          </div>
         </div>
         <div className="">
             {place}

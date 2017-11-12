@@ -51,10 +51,10 @@ class NewPlacesContainer extends Component {
     })
     return(
       <div className="places-form-container">
-        <div className="trip-plan-container">
+        <div className="trip-plan-container image">
           {place}
         </div>
-        <div>
+        <div className='place-form'>
           {placeForm}
         </div>
       </div>

@@ -34,7 +34,7 @@ class Home extends Component {
 
   render() {
     return(
-      <div className='index-container'>
+      <div className='index-container image'>
         <div className='new-trip-button'>
           <NavLink to='/newtrip/start'><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
         </div>

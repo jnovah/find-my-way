@@ -67,13 +67,11 @@ class PlanMyTrip extends Component {
     return(
       <div>
         <TopBar />
-        <div className='image'>
-          <Switch>
-            <Route path='/show/:id/:title' render={props =>(<TripShowContainer handleEnRoute={this.handleEnRoute} {...props} />)} />
-            <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
-            <Route path='/' component={Home} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route path='/show/:id/:title' render={props =>(<TripShowContainer handleEnRoute={this.handleEnRoute} {...props} />)} />
+          <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
+          <Route path='/' component={Home} />
+        </Switch>
       </div>
     )
   }
