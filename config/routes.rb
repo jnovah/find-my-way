@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'home', to: 'home#show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'static_files#index'
+  root "static_files#index"
 
   namespace :api do
     namespace :v1 do
