@@ -1,0 +1,10 @@
+export const TOGGLE_TRIPS = 'TOGGLE_TRIPS'
+export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+export const FETCH_TRIPS = 'FETCH_TRIPS'
+export const FETCH_LEGS = 'FETCH_LEGS'
+export const FETCH_PLACES = 'FETCH_PLACES'
+
+export const VisibilityFilters ={
+  SHOW_COMPLETED: 'SHOW_COMPLETED',
+  SHOW_IN_PLANNING: 'SHOW_IN_PLANNING'
+}
