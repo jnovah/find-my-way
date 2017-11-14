@@ -1,3 +1,5 @@
+import * as types from './actionTypes'
+
 export toggleTrips(index) {
   return { type: TOGGLE_TRIPS, index }
 }
