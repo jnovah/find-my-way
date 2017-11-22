@@ -6,3 +6,9 @@
 #     https: false
 #   )
 # end
+
+GoogleMapsService.configure do |config|
+  config.key = 'AIzaSyBxgCBGkaioyQNgXAPVEiBfnz9IFeVfXws'
+  config.retry_timeout = 20
+  config.queries_per_second = 10
+end
