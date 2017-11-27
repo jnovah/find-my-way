@@ -16,23 +16,11 @@ class PlanMyTrip extends Component {
   }
 
   handleEnRoute(trip) {
-    const DirectionsService = new google.maps.DirectionsService();
-    let waypointsArray = trip.stops.map(stop => {
-      return(
-        {location: new google.maps.LatLng(stop.lat, stop.long)}
-      )
-    })
-      DirectionsService.route({
-        origin: new google.maps.LatLng(trip.start.lat, trip.start.long),
-        destination: new google.maps.LatLng(trip.end.lat, trip.end.long),
-        waypoints: waypointsArray,
-        travelMode: google.maps.TravelMode.DRIVING,
-      }, (result, status) => {
-        if (status === google.maps.DirectionsStatus.OK) {
-          let legPayLoad = this.legMapper(result.routes[0].waypoint_order, trip)
-          this.createLegs(legPayLoad, trip.trip)
-        }
-      })
+    fetch(`/api/v1/trips/${trip.id}/directions.json`, {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {"Content-Type": "application/json"}
+    }) .then(response => response.json())
     }
 
   legMapper(waypointOrder, trip) {

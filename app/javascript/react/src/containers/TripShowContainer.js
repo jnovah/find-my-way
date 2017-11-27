@@ -41,14 +41,14 @@ class TripShowContainer extends Component {
   }
 
   handleClick() {
-    fetch(`/api/v1/trips/en_route/${this.state.trip.id}.json`, {
-      method: "PATCH",
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}
-    }) .then(response => response.json())
-    .then(body => {
-      this.props.handleEnRoute(body)
-    })
+    this.props.handleEnRoute(this.state.trip)
+    // fetch(`/api/v1/trips/en_route/${this.state.trip.id}.json`, {
+    //   method: "PATCH",
+    //   credentials: "same-origin",
+    //   headers: {"Content-Type": "application/json"}
+    // }) .then(response => response.json())
+    // .then(body => {
+    // })
   }
 
   render() {

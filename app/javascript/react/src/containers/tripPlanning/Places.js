@@ -13,7 +13,8 @@ class Places extends Component {
       lat: '',
       long: '',
       placeId: '',
-      name: ''
+      name: '',
+      errors: []
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -43,8 +44,12 @@ class Places extends Component {
 
   formPayLoad(coordinates){
     let payLoad
-    if (this.state.address !== "" && coordinates.lat !== "" && coordinates.lng !== "") {
-      payLoad = { address: this.state.address, lat: coordinates.lat, long: coordinates.lng, trip_id:this.props.tripId }
+    if (coordinates.lat !== '' && coordinates.lng !== '') {
+      payLoad = { address: this.state.address, trip_id:this.props.tripId }
+    } else {
+      errors = this.state.errors
+      errors.push('Must be a valid address')
+      this.setState({ errors: errors })
     }
     return payLoad
   }
@@ -58,6 +63,10 @@ class Places extends Component {
       value: this.state.address,
       onChange: this.handleChange,
       placeholder: this.props.placeholder
+    }
+    let errors
+    if (this.state.errors) {
+      errors = this.state.errors
     }
 
     return(

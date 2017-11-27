@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108090148) do
+ActiveRecord::Schema.define(version: 20171119021743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "legs", force: :cascade do |t|
     t.bigint "trip_id", null: false
@@ -24,6 +25,10 @@ ActiveRecord::Schema.define(version: 20171108090148) do
     t.integer "order", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.hstore "distance", default: {}, null: false
+    t.hstore "duration", default: {}, null: false
+    t.hstore "origin_location", null: false
+    t.hstore "destination_location", default: {}, null: false
     t.index ["trip_id"], name: "index_legs_on_trip_id"
   end
 
@@ -41,9 +46,6 @@ ActiveRecord::Schema.define(version: 20171108090148) do
     t.bigint "trip_id", null: false
     t.string "type", null: false
     t.string "address"
-    t.string "name"
-    t.string "lat"
-    t.string "long"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["trip_id"], name: "index_places_on_trip_id"
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(version: 20171108090148) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status", null: false
+    t.hstore "bounds", default: {}, null: false
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
