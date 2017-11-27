@@ -14,4 +14,12 @@ class Trip < ApplicationRecord
     where(status: 'en route')
   end
 
+  def has_legs?
+    if self.legs.length > 0
+      return true
+    else
+      return false
+    end
+  end
+
 end
