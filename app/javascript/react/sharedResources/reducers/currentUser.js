@@ -10,10 +10,13 @@ const currentUser = (state = initialState, action) => {
     case FETCH_CURRENT_USER:
       return Object.assign({}, state, { isFetching: true })
     case FETCH_CURRENT_USER_SUCCESS:
+    debugger
       return Object.assign({}, state, {
         isFetching: false,
         item: action.currentUser
       })
+    default:
+      return state
   }
 }
 

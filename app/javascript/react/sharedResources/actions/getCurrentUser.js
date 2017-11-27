@@ -26,7 +26,9 @@ let getCurrentUser = () => dispatch => {
     credentials: "same-origin",
     headers: {"Content-Type": "application/json"}
   }) .then(response => { return response.json() })
-  .then(data => { dispatch(fetchCurrentUserSuccess(humps.camelizeKeys(data.user))) })
+  .then(data => {
+    dispatch(fetchCurrentUserSuccess(data.user))
+  })
 }
 
 export {
