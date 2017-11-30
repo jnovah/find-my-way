@@ -21,4 +21,20 @@ class Trip < ApplicationRecord
     end
   end
 
+  def set_en_route
+    if !self.completed
+      self.update(en_route: true, planning: false)
+    else
+      self.errors.add(:completed, :invalid, message: "trip cannot be set to en route")
+    end
+  end
+
+  def set_completed
+    if self.en_route
+      self.update(completed: true, en_route: false)
+    else
+      self.errors.add(:planning, :invalid, message: "-- Trips in planning cannot be updated to completed")
+    end
+  end
+
 end
