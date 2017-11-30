@@ -28,14 +28,18 @@ FactoryBot.define do
   end
 
   trait :planning do
-    status "planning"
+    planning true
   end
 
   trait :en_route do
-    status "en route"
+    en_route true
+    planning false
+    completed false
   end
 
   trait :completed do
-    staus "completed"
+    completed true
+    planning false
+    en_route false
   end
 end
