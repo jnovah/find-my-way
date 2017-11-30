@@ -4,13 +4,7 @@ class Api::V1::TripsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-    user = current_user
-    trips = []
-    user.trips.each do |trip|
-      if trip.start && trip.end
-        trips.push(trip)
-      end
-    end
+    trips = Trip.where(user_id: current_user.id)
     render json: trips
   end
 
@@ -37,7 +31,7 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def check_en_route
-    if trip = Trip.find_by(status: 'en route', user_id: current_user.id)
+    if trip = Trip.find_by(en_route: true, user_id: current_user.id)
       render json: { en_route: true }
     else
       render json: { en_route: false }
@@ -45,7 +39,7 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def get_en_route
-    trip = Trip.find_by(status: 'en route', user_id: current_user.id)
+    trip = Trip.find_by(en_route: true, user_id: current_user.id)
     legs = trip.legs
     routes = []
     count = 0

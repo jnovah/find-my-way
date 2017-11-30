@@ -7,10 +7,10 @@ const TripIndexTile = props => {
           <div className="column small-6 align-self-middle trip-title"><strong>{props.trip.title}</strong></div>
           <div className="column small-6 trip-description">{props.trip.description}</div>
         </div>
-        <ul>
-          <div className="column small-12 locations start"><strong>Start: </strong>{props.trip.start.address}</div>
-          <div className="column small-12 locations end"><strong>End: </strong>{props.trip.end.address}</div>
-        </ul>
+        {/* <ul> */}
+          {/* <div className="column small-12 locations start"><strong>Start: </strong>{props.trip.start.address}</div> */}
+          {/* <div className="column small-12 locations end"><strong>End: </strong>{props.trip.end.address}</div> */}
+        {/* </ul> */}
       </div>
   )
 }

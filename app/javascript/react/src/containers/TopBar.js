@@ -40,7 +40,7 @@ class TopBarContainer extends Component {
 
 const TopBar = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(TopBarContainer)
 
 export default TopBar

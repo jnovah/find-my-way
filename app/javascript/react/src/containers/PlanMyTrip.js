@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Route, NavLink, Switch } from 'react-router-dom'
 import Home from './HomeContainer'
-import TripShowContainer from './TripShowContainer'
 import NewTrip from './tripPlanning/NewTrip'
 import TopBar from './TopBar'
+import Index from './IndexContainer'
 
 class PlanMyTrip extends Component {
   constructor(props) {
@@ -11,8 +11,6 @@ class PlanMyTrip extends Component {
     this.state = {
     }
     this.handleEnRoute = this.handleEnRoute.bind(this)
-    this.legMapper = this.legMapper.bind(this)
-    this.createLegs = this.createLegs.bind(this)
   }
 
   handleEnRoute(trip) {
@@ -28,9 +26,19 @@ class PlanMyTrip extends Component {
       <div>
         <TopBar />
         <Switch>
-          <Route path='/show/:id/:title' render={props =>(<TripShowContainer handleEnRoute={this.handleEnRoute} {...props} />)} />
+
           <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
-          <Route path='/' component={Home} />
+          <div>
+            <div className='new-trip-button'>
+              <NavLink to='/newtrip/start'><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
+            </div>
+          </div>
+        </Switch>
+        <Switch>
+          <Route strict path={`${this.props.match.path}index`} component={Home} />
+          <div className='new-trip-button'>
+            <NavLink to={`${this.props.match.path}index`}><button className="btn btn-4 btn-4c add-new">View all created trips!</button></NavLink>
+          </div>
         </Switch>
       </div>
     )

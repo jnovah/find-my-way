@@ -1,14 +1,9 @@
-const FETCH_ALL_TRIPS = 'FETCH_ALL_TRIPS'
-const FETCH_ALL_TRIPS_SUCCESS = 'FETCH_ALL_TRIPS_SUCCESS'
-const TOGGLE_TRIPS = 'TOGGLE_TRIPS'
-const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
-const FETCH_TRIPS = 'FETCH_ITEMS'
+import { setVisibilityFilter, SHOW_ALL } from './setVisibilityFilter'
 
-const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_IN_PLANNING: 'SHOW_IN_PLANNING'
-}
+export const FETCH_ALL_TRIPS = 'FETCH_ALL_TRIPS'
+export const FETCH_ALL_TRIPS_SUCCESS = 'FETCH_ALL_TRIPS_SUCCESS'
+export const TOGGLE_TRIPS = 'TOGGLE_TRIPS'
+export const TRIPS_DEPENDENT_CLASS = 'TRIPS_DEPENDENT_CLASS'
 
 let fetchAllTrips = () => {
   return {
@@ -19,7 +14,8 @@ let fetchAllTrips = () => {
 let fetchAllTripsSuccess = allTrips => {
   return {
     type: FETCH_ALL_TRIPS_SUCCESS,
-    allTrips
+    allTrips,
+    class: ''
   }
 }
 
@@ -31,5 +27,15 @@ let getAllTrips = () => dispatch => {
   }) .then(response => response.json())
   .then(data => {
     dispatch(fetchAllTripsSuccess(data.trips))
+    return data.trips
   })
+  .then(trips => {
+    dispatch(setVisibilityFilter(SHOW_ALL, trips))
+  })
+}
+
+export {
+  fetchAllTrips,
+  fetchAllTripsSuccess,
+  getAllTrips
 }
