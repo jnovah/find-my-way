@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Route, NavLink, Switch } from 'react-router-dom'
 import Home from './HomeContainer'
-import TripShowContainer from './TripShowContainer'
 import NewTrip from './tripPlanning/NewTrip'
 import TopBar from './TopBar'
+import Index from './IndexContainer'
 
 class PlanMyTrip extends Component {
   constructor(props) {
@@ -11,8 +11,6 @@ class PlanMyTrip extends Component {
     this.state = {
     }
     this.handleEnRoute = this.handleEnRoute.bind(this)
-    this.legMapper = this.legMapper.bind(this)
-    this.createLegs = this.createLegs.bind(this)
   }
 
   handleEnRoute(trip) {
@@ -23,42 +21,24 @@ class PlanMyTrip extends Component {
     }) .then(response => response.json())
     }
 
-  legMapper(waypointOrder, trip) {
-    let nestedPayLoad = waypointOrder.map((waypoint, index) => {
-      if (index == 0) {
-        return([{ trip_id: trip.trip.id, origin_id: trip.start.id, destination_id: trip.stops[waypoint].id, current: true, order: index+1}, { trip_id: trip.trip.id, origin_id: trip.stops[waypoint].id, destination_id: trip.stops[waypoint+1].id, current: false, order: index+2}])
-      } else if (index === waypointOrder.length-1) {
-        return({ trip_id: trip.trip.id, origin_id: trip.stops[waypoint].id, destination_id: trip.end.id , current: false, order: index+2})
-      } else {
-        return({ trip_id: trip.trip.id, origin_id: trip.stops[waypoint].id, destination_id: trip.stops[waypoint+1].id, current: false, order: index+2})
-      }
-    })
-    let legPayLoad
-    if (waypointOrder.length > 0) {
-      legPayLoad = [].concat.apply([], nestedPayLoad)
-    } else if (waypointOrder.length === 0) {
-      legPayLoad = { trip_id: trip.trip.id, origin_id: trip.start.id, destination_id: trip.end.id , current: true, order: 1}
-    }
-    return { legs: legPayLoad }
-  }
-
-  createLegs(legPayLoad, trip) {
-    fetch(`/api/v1/trips/${trip.id}/legs`, {
-      method: "POST",
-      body: JSON.stringify(legPayLoad),
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}
-    }) .then(this.props.handleEnRoute())
-  }
-
   render() {
     return(
       <div>
         <TopBar />
         <Switch>
-          <Route path='/show/:id/:title' render={props =>(<TripShowContainer handleEnRoute={this.handleEnRoute} {...props} />)} />
+
           <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
-          <Route path='/' component={Home} />
+          <div>
+            <div className='new-trip-button'>
+              <NavLink to='/newtrip/start'><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
+            </div>
+          </div>
+        </Switch>
+        <Switch>
+          <Route strict path={`${this.props.match.path}index`} component={Home} />
+          <div className='new-trip-button'>
+            <NavLink to={`${this.props.match.path}index`}><button className="btn btn-4 btn-4c add-new">View all created trips!</button></NavLink>
+          </div>
         </Switch>
       </div>
     )

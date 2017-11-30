@@ -1,60 +1,55 @@
 import React, { Component } from 'react'
 import { NavLink, Switch, Route } from 'react-router-dom'
-import TripIndexTile from '../components/TripIndexTile'
+import { connect } from 'react-redux'
 import NewTrip from './tripPlanning/NewTrip'
-import IndexContainer from './IndexContainer'
+import Index from './IndexContainer'
 
-class Home extends Component {
+import { setVisibilityFilter } from '../../sharedResources/actions/setVisibilityFilter'
+
+const mapStateToProps = state => {
+  return {
+    visibilityFilter: state.trips.visibilityFilter,
+    isFetching: state.trips.isFetching,
+    trips: state.trips.trips,
+    filteredTrips: state.trips.filteredTrips
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setVisibilityFilter: (filter, trips) => { dispatch(setVisibilityFilter(filter, trips)) }
+  }
+}
+
+class HomeContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      tripsInPlanning: [],
-      completedTrips: []
-    }
+    this.toggleVisibilityFilter = this.toggleVisibilityFilter.bind(this)
   }
 
-  componentDidMount() {
-    fetch('/api/v1/trips', {
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}
-    }) .then(response => response.json())
-    .then(body => {
-      let tripsInPlanning = []
-      let completedTrips = []
-      body.trips.map(trip => {
-        if (trip.status === 'planning') {
-          tripsInPlanning.push(trip)
-        } else {
-          completedTrips.push(trip)
-        }
-      })
-      this.setState({ tripsInPlanning: tripsInPlanning, completedTrips: completedTrips })
-    })
+  toggleVisibilityFilter(event) {
+    this.props.setVisibilityFilter(event.target.id, this.props.trips)
   }
 
   render() {
     return(
       <div className='index-container image'>
-        <div className='new-trip-button'>
-          <NavLink to='/newtrip/start'><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
-        </div>
         <div className='trip-types'>
-          <div className='trips-index-container depth'>
-            <NavLink to='/trips-in-planning/'><h1 className='trips-index'>Trips in Planning</h1></NavLink>
-          </div>
-          <div className='trips-index-container depth'>
-            <NavLink to='/completed-trips/'><h1 className='trips-index'>Completed Trips</h1></NavLink>
-          </div>
+          <button onClick={this.toggleVisibilityFilter} id='SHOW_IN_PLANNING' className="btn btn-4 btn-4c add-new">Trips in Planning</button>
+          <button onClick={this.toggleVisibilityFilter} id='SHOW_COMPLETED' className="btn btn-4 btn-4c add-new">Completed Trips</button>
+          <button onClick={this.toggleVisibilityFilter} id='SHOW_ALL' className="btn btn-4 btn-4c add-new">All Trips</button>
         </div>
         <div>
-          <Switch>
-            <Route strict path='/completed-trips/' render={props => (<IndexContainer trips={this.state.completedTrips} {...props} />)}/>
-            <Route strict path='/trips-in-planning/' render={props => (<IndexContainer trips={this.state.tripsInPlanning} {...props} />)}/>
-          </Switch>
+          <Index />
         </div>
       </div>
     )
   }
 }
+
+const Home = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeContainer)
 
 export default Home

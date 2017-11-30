@@ -283,8 +283,8 @@ DEPENDENCIES
   active_model_serializers
   capybara
   coveralls
-  dotenv-rails
   database_cleaner
+  dotenv-rails
   factory_bot
   factory_bot_rails
   faker
