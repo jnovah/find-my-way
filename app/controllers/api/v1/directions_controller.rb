@@ -8,7 +8,6 @@ class Api::V1::DirectionsController < ApplicationController
     @waypoints = create_waypoints(@trip)
     @routes = get_routes
     handle_routes
-    binding.pry
     render json: @trip.legs
   end
 
@@ -42,7 +41,6 @@ class Api::V1::DirectionsController < ApplicationController
 
   def sort_legs
     @routes[0][:legs].each_with_index do |leg, index|
-      binding.pry
       create_leg = Leg.new(
         trip_id: @trip.id,
         origin_id: origin_id(index, @routes[0][:waypoint_order]),
@@ -53,7 +51,6 @@ class Api::V1::DirectionsController < ApplicationController
         origin_location: leg[:start_location],
         destination_location: leg[:end_location]
       )
-      binding.pry
       if create_leg.valid?
         create_leg.save
       end

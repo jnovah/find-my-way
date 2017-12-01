@@ -27,6 +27,6 @@ class Api::V1::PlacesController < ApplicationController
   private
 
   def places_params
-    params.require(:place).permit(:address, :lat, :long, :trip_id, :name)
+    params.require(:place).permit(:address, :trip_id, :name)
   end
 end

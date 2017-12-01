@@ -36,5 +36,4 @@ class Trip < ApplicationRecord
       self.errors.add(:planning, :invalid, message: "-- Trips in planning cannot be updated to completed")
     end
   end
-
 end
