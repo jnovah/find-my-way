@@ -10,7 +10,7 @@ class Trip < ApplicationRecord
   validates_presence_of :title
 
   def self.en_route
-    where(en_route: 'true')
+    where(en_route: true)
   end
 
   def has_legs?
