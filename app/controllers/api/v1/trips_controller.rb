@@ -20,7 +20,7 @@ class Api::V1::TripsController < ApplicationController
   def complete
     trip = Trip.find(params[:id])
     trip.update(status: "completed")
-    render json: {status: "complete"}
+    render json: { status: "complete" }
   end
 
   def create
@@ -71,6 +71,6 @@ class Api::V1::TripsController < ApplicationController
 
 
   def trip_params
-    params.require(:trip).permit(:title, :description, :status)
+    params.require(:trip).permit(:title, :description)
   end
 end
