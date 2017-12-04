@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Switch, Route, NavLink, Redirect } from 'react-router-dom'
-import ViewsLogic from '../../components/tripPlanning/ViewsLogic'
 import NewTripFormContainer from './containers/NewTripFormContainer'
 import NewPlacesContainer from './containers/NewPlacesContainer'
 
