@@ -1,5 +1,3 @@
-import humps from 'humps'
-
 import baseUrl from '../constants/baseUrl'
 
 const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER'
