@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128022041) do
+ActiveRecord::Schema.define(version: 20171203223414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20171128022041) do
     t.boolean "planning", default: true, null: false
     t.boolean "en_route", default: false, null: false
     t.boolean "completed", default: false, null: false
+    t.boolean "has_legs", default: false
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { getCurrentUser } from '../../sharedResources/actions/getCurrentUser'
+import { getCurrentUser } from '../sharedResources/actions/getCurrentUser'
 
 const mapStateToProps = state => {
   return {
@@ -29,7 +29,7 @@ class TopBarContainer extends Component {
   render() {
     return(
       <div className='top-bar'>
-        <NavLink to={'/'}><div className='column small-3 top-bar-left home-link'>FIND MY WAY</div></NavLink>
+        <NavLink to={'/all-trips/'}><div className='column small-3 top-bar-left home-link'>FIND MY WAY</div></NavLink>
         <div className='column small-3 top-bar-left'>{this.props.script}</div>
         <div className=" profile_picture"><img  src={this.props.currentUser.picture} /></div>
         <div className='column small-3 end name'>Welcome {this.props.currentUser.first_name}!</div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch, NavLink } from 'react-router-dom'
 import Places from './Places'
-import PlacesEndpointTile from '../../components/tripPlanning/PlacesEndpointTile'
+import PlacesEndpointTile from '../components/PlacesEndpointTile'
 
 class NewPlacesContainer extends Component {
   constructor(props) {

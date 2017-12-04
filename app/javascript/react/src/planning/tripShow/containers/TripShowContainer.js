@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route, NavLink } from 'react-router-dom'
 import TripDestinationTile from '../components/TripDestinationTile'
-import Places from './tripPlanning/Places'
+import Places from '../../tripForm/containers/Places'
 
 class TripShowContainer extends Component {
   constructor(props) {

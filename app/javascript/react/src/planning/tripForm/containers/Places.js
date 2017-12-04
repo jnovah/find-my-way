@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import FormField from '../../components/FormField'
+import FormField from '../components/FormField'
 
 
 class Places extends Component {

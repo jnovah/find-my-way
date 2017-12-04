@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { NavLink, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import NewTrip from './tripPlanning/NewTrip'
-import Index from './IndexContainer'
+import Index from './containers/IndexContainer'
 
-import { setVisibilityFilter } from '../../sharedResources/actions/setVisibilityFilter'
+import { setVisibilityFilter } from './actions/setVisibilityFilter'
 
 const mapStateToProps = state => {
   return {
