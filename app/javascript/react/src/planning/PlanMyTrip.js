@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Route, NavLink, Switch } from 'react-router-dom'
-import Home from './HomeContainer'
-import NewTrip from './tripPlanning/NewTrip'
-import TopBar from './TopBar'
-import Index from './IndexContainer'
+import Home from './tripIndex/HomeContainer'
+import NewTrip from './tripForm/NewTrip'
+
 
 class PlanMyTrip extends Component {
   constructor(props) {
@@ -24,9 +23,7 @@ class PlanMyTrip extends Component {
   render() {
     return(
       <div>
-        <TopBar />
         <Switch>
-
           <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
           <div>
             <div className='new-trip-button'>

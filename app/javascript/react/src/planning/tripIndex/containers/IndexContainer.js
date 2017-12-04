@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import TripIndexTile from '../../sharedResources/components/TripIndexTile'
+import TripIndexTile from '../components/TripIndexTile'
 
 const mapStateToProps = state => {
   return {

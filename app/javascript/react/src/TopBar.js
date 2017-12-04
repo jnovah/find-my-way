@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { getCurrentUser } from '../../sharedResources/actions/getCurrentUser'
+import { getCurrentUser } from '../sharedResources/actions/getCurrentUser'
 
 const mapStateToProps = state => {
   return {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, NavLink, Switch } from 'react-router-dom'
-import FormField from '../../components/FormField'
+import FormField from '../components/FormField'
 
 class NewTripFormContainer extends Component {
   constructor(props) {

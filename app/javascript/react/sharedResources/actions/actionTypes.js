@@ -1,8 +1,0 @@
-export const TOGGLE_TRIPS = 'TOGGLE_TRIPS'
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
-export const FETCH_TRIPS = 'FETCH_ITEMS'
-
-export const VisibilityFilters ={
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_IN_PLANNING: 'SHOW_IN_PLANNING'
-}
