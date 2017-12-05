@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import TopBar from './TopBar'
 import PlanMyTrip from './planning/PlanMyTrip'
-import TripShowContainer from './planning/tripShow/containers/TripShowContainer'
+import TripShow from './planning/tripShow/containers/TripShowContainer'
 import EnRoute from './containers/EnRoute'
 import { getAllTrips } from './planning/tripIndex/actions/getAllTrips'
 
@@ -42,7 +42,7 @@ class FindMyWayContainer extends Component {
           <div>
             <TopBar />
             <Switch>
-              <Route strict path='/show/:id/' render={props =>(<TripShowContainer handleEnRoute={this.handleEnRoute} {...props} />)} />
+              <Route strict path='/show/:id/' render={props =>(<TripShow handleEnRoute={this.handleEnRoute} {...props} />)} />
               <Route strict path='/all-trips/' component={PlanMyTrip} />
               <div>
                 <h1>Welcome to <strong>Find My Way</strong>!</h1>

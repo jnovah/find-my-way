@@ -7,6 +7,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import currentUser from '../react/sharedResources/reducers/currentUser'
 import trips from '../react/src/planning/tripIndex/reducers/allTrips'
+import trip from '../react/src/planning/tripShow/reducers/trip'
 
 const middlewares = [thunkMiddleware]
 
@@ -14,6 +15,7 @@ const store = createStore(
   combineReducers({
     currentUser,
     trips,
+    trip
   }),
   applyMiddleware(...middlewares)
 )

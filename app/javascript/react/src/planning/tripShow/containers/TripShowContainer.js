@@ -1,7 +1,24 @@
 import React, { Component } from 'react'
 import { Switch, Route, NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getTrip } from '../actions/tripShow'
 import TripDestinationTile from '../components/TripDestinationTile'
 import Places from '../../tripForm/containers/Places'
+
+const mapStateToProps = state => {
+  return {
+    trip: state.trip.trip,
+    hasLegs: state.trip.hasLegs,
+    class: state.trip.class,
+    directions: state.trip.directions
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getTrip: (id) => { dispatch(getTrip(id)) }
+  }
+}
 
 class TripShowContainer extends Component {
   constructor(props) {
@@ -14,15 +31,9 @@ class TripShowContainer extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount() {
-    fetch(`/api/v1/trips/${this.props.match.params.id}.json`, {
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}
-    })
-    .then(response => response.json())
-    .then(body => {
-      this.setState({ trip: body.trip, destinations: body.destinations })
-    })
+  componentWillMount() {
+    debugger
+    this.props.getTrip(this.props.match.params.id)
   }
 
   handleStopSubmit(payLoad, type) {
@@ -75,10 +86,13 @@ class TripShowContainer extends Component {
           <div className="destination place">Add a new Pit-Stop</div>
           <Places tripId={this.state.trip.id} type='stop' addNewPlace={this.handleStopSubmit}/>
         </div>
-
       </div>
     )
   }
 }
+
+const TripShow = connect(
+  mapStateToProps, mapDispatchToProps
+)(TripShowContainer)
 
 export default TripShowContainer

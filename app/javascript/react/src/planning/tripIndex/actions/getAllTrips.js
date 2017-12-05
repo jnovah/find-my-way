@@ -21,7 +21,7 @@ let fetchAllTripsSuccess = allTrips => {
 
 let getAllTrips = () => dispatch => {
   dispatch(fetchAllTrips())
-  return fetch('/api/v1/trips', {
+  return fetch('/api/v1/trips.json', {
     credentials: "same-origin",
     headers: {"Content-Type": "application/json"}
   }) .then(response => response.json())
