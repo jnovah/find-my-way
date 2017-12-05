@@ -1,7 +1,7 @@
 export const TOGGLE_TRIP = 'TOGGLE_TRIP'
 export const FETCH_TRIP = 'FETCH_TRIP'
 export const FETCH_TRIP_SUCCESS = 'FETCH_TRIP_SUCCESS'
-export const NO_LEGS = 'NO_LEGS'
+export const HAS_LEGS = 'NO_LEGS'
 export const COMPLETED_TRIP = 'COMPLETED_TRIP'
 
 let toggleTrip = (id) => {
