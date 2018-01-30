@@ -3,10 +3,19 @@ import { TOGGLE_TRIP, FETCH_TRIP, FETCH_TRIP_SUCCESS, HAS_LEGS, COMPLETED_TRIP }
 let initialState = {
   currentTrip: null,
   isFetching: false,
-  trip: {},
+  title: "",
+  description: "",
+  origin: {},
+  final: {},
+  stops: [],
   directions: [],
+  mapBounds: {},
   hasLegs: false,
   completed: false,
+  planning: false,
+  en_route: false,
+  completed: false,
+  legs: [],
   class: ''
 }
 
@@ -29,7 +38,18 @@ const trip = (state = initialState, action) => {
     case FETCH_TRIP_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        trip: action.trip
+        currentTrip: action.trip.id,
+        title: action.trip.title,
+        description: action.trip.description,
+        hasLegs: action.trip.has_legs,
+        completed: action.trip.completed,
+        en_route: action.trip.en_route,
+        planning: action.trip.planning,
+        mapBounds: action.trip.bounds,
+        origin: Object.assign({}, state.start, action.trip.start),
+        final: Object.assign({}, state.final, action.trip.end),
+        stops: action.trip.stops,
+        legs: action.trip.legs
       })
     default:
       return state

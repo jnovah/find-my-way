@@ -7,10 +7,7 @@ import Places from '../../tripForm/containers/Places'
 
 const mapStateToProps = state => {
   return {
-    trip: state.trip.trip,
-    hasLegs: state.trip.hasLegs,
-    class: state.trip.class,
-    directions: state.trip.directions
+    trip: state.trip,
   }
 }
 
@@ -32,8 +29,10 @@ class TripShowContainer extends Component {
   }
 
   componentWillMount() {
-    debugger
     this.props.getTrip(this.props.match.params.id)
+  }
+
+  componentDidUpdate() {
   }
 
   handleStopSubmit(payLoad, type) {
@@ -64,27 +63,35 @@ class TripShowContainer extends Component {
 
   render() {
     let className
-    let destination = Object.keys(this.state.destinations).map((type, index) => {
+    let destination = this.props.trip.stops.map((stop, index) => {
       return(
-        <TripDestinationTile type={type} location={this.state.destinations[type]} key={`dest${index}`}/>
+        <TripDestinationTile type='stops' location={stop} key={`stop${index}`}/>
       )
     })
-    if (this.state.trip.status === 'completed') {
+    if (this.props.trip.completed) {
       className = 'hidden'
     }
+    debugger
     return(
       <div>
-        <div className='image'>
-          <h1>{this.state.trip.title}</h1>
-          <div className="destination">{this.state.trip.description}</div>
+        <div className=''>
+          <h1>{this.props.trip.title}</h1>
+          <div className="destination">{this.props.trip.description}</div>
           <div className={`${className} start-trip-button `}>
             <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Start Trip</button>
           </div>
-          <div className='destination-container row'>{destination}</div>
+          <div id='origin' className='destination-container row'>
+            <TripDestinationTile type='start' location={this.props.trip.origin} key='origin'/>
+          </div>
+          <div id='final' className='destination-container row'>
+            <TripDestinationTile type='end' location={this.props.trip.final} key='final'/>
+          </div>
+          <div id='final' className='destination-container row'>{destination}
+          </div>
         </div>
         <div className={className}>
           <div className="destination place">Add a new Pit-Stop</div>
-          <Places tripId={this.state.trip.id} type='stop' addNewPlace={this.handleStopSubmit}/>
+          <Places tripId={this.props.trip.currentTrip} type='stop' addNewPlace={this.handleStopSubmit}/>
         </div>
       </div>
     )
@@ -95,4 +102,4 @@ const TripShow = connect(
   mapStateToProps, mapDispatchToProps
 )(TripShowContainer)
 
-export default TripShowContainer
+export default TripShow
