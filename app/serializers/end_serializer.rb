@@ -1,3 +1,3 @@
 class EndSerializer < ActiveModel::Serializer
-  attributes :id, :address, :lat, :long
+  attributes :id, :address
 end

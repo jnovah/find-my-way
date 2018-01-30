@@ -11,7 +11,7 @@ class Api::V1::TripsController < ApplicationController
   def show
     trip = Trip.find(params[:id])
     if trip.user == current_user
-      render json: { trip: trip, destinations: { start: trip.start, end: trip.end, stops: trip.stops } }
+      render json: trip
     else
       render json: { error: "You do not have access to this trip" }
     end
