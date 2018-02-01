@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getTrip } from '../actions/tripShow'
+import { getTrip, newTripForm } from '../actions/tripShow'
 import TripDestinationTile from '../components/TripDestinationTile'
 import Places from '../../tripForm/containers/Places'
 
@@ -13,7 +13,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getTrip: (id) => { dispatch(getTrip(id)) }
+    getTrip: (id) => { dispatch(getTrip(id)) },
+    newTripForm: () => { dispatch(newTripForm()) }
   }
 }
 
@@ -29,7 +30,9 @@ class TripShowContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.getTrip(this.props.match.params.id)
+    if (!this.props.trip.tripForm) {
+      this.props.getTrip(this.props.match.params.id)
+    }
   }
 
   componentDidUpdate() {
@@ -68,10 +71,10 @@ class TripShowContainer extends Component {
         <TripDestinationTile type='stops' location={stop} key={`stop${index}`}/>
       )
     })
-    if (this.props.trip.completed) {
+    if (this.props.trip.completed || this.props.trip.tripForm) {
       className = 'hidden'
     }
-    debugger
+
     return(
       <div>
         <div className=''>

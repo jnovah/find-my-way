@@ -43,12 +43,12 @@ class FindMyWayContainer extends Component {
             <TopBar />
             <Switch>
               <Route strict path='/show/:id/' render={props =>(<TripShow handleEnRoute={this.handleEnRoute} {...props} />)} />
-              <Route strict path='/all-trips/' component={PlanMyTrip} />
+              <Route strict path='/trips/' component={PlanMyTrip} />
               <div>
                 <h1>Welcome to <strong>Find My Way</strong>!</h1>
                 <p><strong>Find My Way</strong> is your ultimate road trip planning app!</p>
                 <div className={`${this.props.class}`}>
-                  <NavLink to='/all-trips/'><button className="btn btn-4 btn-4c add-new">Continue!</button></NavLink>
+                  <NavLink to='/trips/'><button className="btn btn-4 btn-4c add-new">Continue!</button></NavLink>
                 </div>
               </div>
             </Switch>

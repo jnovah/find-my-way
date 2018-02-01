@@ -1,61 +1,47 @@
 import React, { Component } from 'react'
 import { Switch, Route, NavLink, Redirect } from 'react-router-dom'
-import NewTripFormContainer from './containers/NewTripFormContainer'
+import { connect } from 'react-redux'
+import NewTripForm from './containers/NewTripFormContainer'
 import NewPlacesContainer from './containers/NewPlacesContainer'
+import TripShow from '../tripShow/containers/TripShowContainer'
+import { newTripForm } from '../tripShow/actions/tripShow'
 
-class NewTrip extends Component {
+const mapStateToProps = state => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    newTripForm: () => { dispatch(newTripForm()) }
+  }
+}
+
+class NewTripContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      trip: {},
-      places: {},
-      types: { start: false, end: false },
-      className: ''
-    }
-    this.addNewTrip = this.addNewTrip.bind(this)
   }
 
-  addNewTrip(formPayLoad) {
-    fetch('/api/v1/trips.json', {
-      method: "POST",
-      body: JSON.stringify(formPayLoad),
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}
-    }) .then(response => response.json())
-    .then(body => {
-      this.setState({ trip: body.trip })
-      this.setState({ className: 'hidden' })
-    })
+  componentWillMount() {
+    this.props.newTripForm()
   }
+
+  componentWillUnmount() {
+    this.props.history.push(`${this.props.match.path}`)
+  }
+
 
   render() {
-    let view
-    let place
-    if (this.state.trip.id) {
-      place = <NewPlacesContainer tripId={this.state.trip.id} tripTitle={this.state.trip.title} />
-    }
-    if (this.state.trip.id) {
-      view = <div className="new-trip-show"><h1>{this.state.trip.title}</h1><div>Description:<br/>{this.state.trip.description}</div></div>
-    }
-
     return(
       <div>
-        <div className='image mod'>
-          <div className={`${this.state.className} column small-12`}>
-            <Switch>
-              <Route strict path='/newtrip/start' render={props => (<NewTripFormContainer addNewTrip={this.addNewTrip} {...props} />)} />
-            </Switch>
-          </div>
-          <div className="new-trip-show">
-            {view}
-          </div>
-        </div>
-        <div className="">
-            {place}
-        </div>
+        <NewTripForm />
+        <TripShow/>
       </div>
     )
   }
 }
+
+const NewTrip = connect(mapStateToProps, mapDispatchToProps)(NewTripContainer)
 
 export default NewTrip

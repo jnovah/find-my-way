@@ -1,4 +1,6 @@
-import { TOGGLE_TRIP, FETCH_TRIP, FETCH_TRIP_SUCCESS, HAS_LEGS, COMPLETED_TRIP } from '../actions/tripShow'
+import { TOGGLE_TRIP, FETCH_TRIP, FETCH_TRIP_SUCCESS, HAS_LEGS, COMPLETED_TRIP, NEW_TRIP_FORM } from '../actions/tripShow'
+import { SET_TRIP_SHOW } from '../../tripForm/actions/submitForms'
+import { SET_TEXT_VALUE } from '../../tripForm/actions/setValue'
 
 let initialState = {
   currentTrip: null,
@@ -16,7 +18,8 @@ let initialState = {
   en_route: false,
   completed: false,
   legs: [],
-  class: ''
+  class: '',
+  tripForm: false
 }
 
 const trip = (state = initialState, action) => {
@@ -51,6 +54,15 @@ const trip = (state = initialState, action) => {
         stops: action.trip.stops,
         legs: action.trip.legs
       })
+    case NEW_TRIP_FORM:
+      return Object.assign({}, state, initialState, { tripForm: true })
+    case SET_TRIP_SHOW:
+      return Object.assign({}, state, {
+        currentTrip: action.trip.id,
+        planning: action.trip.planning
+      })
+      case SET_TEXT_VALUE:
+        return Object.assign({}, state, { [action.inputType]: action.value })
     default:
       return state
   }

@@ -3,6 +3,13 @@ export const FETCH_TRIP = 'FETCH_TRIP'
 export const FETCH_TRIP_SUCCESS = 'FETCH_TRIP_SUCCESS'
 export const HAS_LEGS = 'NO_LEGS'
 export const COMPLETED_TRIP = 'COMPLETED_TRIP'
+export const NEW_TRIP_FORM = 'NEW_TRIP_FORM'
+
+let newTripForm = () => {
+  return {
+    type: NEW_TRIP_FORM
+  }
+}
 
 let toggleTrip = (id) => {
   return {
@@ -55,5 +62,6 @@ export {
   fetchTrip,
   fetchTripSuccess,
   hasLegs,
-  getTrip
+  getTrip,
+  newTripForm
 }
