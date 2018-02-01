@@ -1,3 +1,3 @@
 class StartSerializer < ActiveModel::Serializer
-  attributes :id, :address, :lat, :long
+  attributes :id, :address
 end

@@ -10,13 +10,8 @@ const TripDestinationTile = props => {
     label = "Final Destination"
     address = props.location.address
   } else if (props.type === 'stops'){
-    label = "Pit-Stops"
-    let entry = props.location.map(stop => {
-      return(
-        <li>{stop.address}</li>
-      )
-    })
-    address = <ul>{entry}</ul>
+    label = "Pit-Stop"
+    address = props.location.address
   }
   return(
     <div className="destination column small-4">{label}:<br/>{address}</div>

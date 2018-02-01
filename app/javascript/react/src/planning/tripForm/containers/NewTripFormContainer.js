@@ -1,48 +1,60 @@
 import React, { Component } from 'react'
 import { Route, NavLink, Switch } from 'react-router-dom'
-import FormField from '../components/FormField'
+import { connect } from 'react-redux'
+import FormField from '../../../../sharedResources/constants/FormField'
+import { setTextValue } from '../actions/setValue'
+import { validateTripForm, saveTrip } from '../actions/submitForms'
+
+const mapStateToProps = state => {
+  return {
+    title: state.trip.title,
+    description: state.trip.description,
+    valid: state.tripForm.tripFormValid,
+    currentTrip: state.trip.currentTrip
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setTextValue: (inputType, value) => { dispatch(setTextValue(inputType, value)) },
+    validateTripForm: (title, description) => { dispatch(validateTripForm(title, description)) },
+    saveTrip: (payload, form) => { dispatch(saveTrip(payload, form)) }
+  }
+}
 
 class NewTripFormContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      title: '',
-      description: '',
-      className: '',
-    }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
+  componentDidUpdate() {
+    this.props.validateTripForm(this.props.title, this.props.description)
+  }
+
   handleChange(event) {
-    let name = event.target.name
-    this.setState({ [name]: event.target.value })
+    this.props.setTextValue(event.target.name, event.target.value)
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    let formPayLoad
-    if(this.state.title !== '' || this.state.title !== ' ') {
-      formPayLoad = {
-        title: this.state.title,
-        description: this.state.description,
-        user_id: 1,
-        status: 'planning'
-      }
+    if (this.props.valid) {
+      let payload = { title: this.props.title, description: this.props.description }
+      this.props.saveTrip(payload, 'trip')
     }
-    this.props.addNewTrip(formPayLoad)
   }
 
   render() {
     return(
-      <div className={`small-8 medium-12 column trip-form ${this.state.className}`}>
+      <div className={`small-8 medium-12 column trip-form`}>
         <form onSubmit={this.handleSubmit}>
           <FormField
             key='title'
             type='text'
             label='Give your trip a name'
             name='title'
-            value={this.state.title}
+            value={this.props.title}
             handleChange={this.handleChange}
           />
           <br/>
@@ -50,17 +62,19 @@ class NewTripFormContainer extends Component {
             key='description'
             className='trip-description'
             type='text'
-            label=''
+            label='All the best trips start with a story'
             name='description'
-            value={this.state.description}
+            value={this.props.description}
             handleChange={this.handleChange}
           />
           <br/>
-          <input className="btn btn-2 btn-2d submit-button" type='submit' value='Continue' />
+          <input type='submit' value='Save & Continue' />
         </form>
       </div>
     )
   }
 }
 
-export default NewTripFormContainer
+const NewTripForm = connect(mapStateToProps, mapDispatchToProps)(NewTripFormContainer)
+
+export default NewTripForm

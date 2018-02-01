@@ -24,17 +24,17 @@ class PlanMyTrip extends Component {
     return(
       <div>
         <Switch>
-          <Route strict path='/newtrip' render={props => (<NewTrip userId={this.state.userId} {...props} />)} />
+          <Route strict path={`${this.props.match.path}newtrip/`} component={NewTrip} />
           <div>
             <div className='new-trip-button'>
-              <NavLink to='/newtrip/start'><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
+              <NavLink to={`${this.props.match.path}newtrip/`}><button className="btn btn-4 btn-4c add-new">Plan a new trip!</button></NavLink>
             </div>
           </div>
         </Switch>
         <Switch>
-          <Route strict path={`${this.props.match.path}index`} component={Home} />
+          <Route strict path={`${this.props.match.path}index/`} component={Home} />
           <div className='new-trip-button'>
-            <NavLink to={`${this.props.match.path}index`}><button className="btn btn-4 btn-4c add-new">View all created trips!</button></NavLink>
+            <NavLink to={`${this.props.match.path}index/`}><button className="btn btn-4 btn-4c add-new">View all created trips!</button></NavLink>
           </div>
         </Switch>
       </div>

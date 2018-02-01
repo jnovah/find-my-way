@@ -9,9 +9,21 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleTrip: (id) => { dispatch(toggleTrip(id)) }
+  }
+}
+
 class IndexContainer extends Component {
   constructor(props) {
     super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(event) {
+    debugger
+    this.props.toggleTrip(event.target.id)
   }
 
   componentDidUpdate() {
@@ -21,7 +33,7 @@ class IndexContainer extends Component {
     let tripIndex = this.props.filteredTrips.map(trip => {
       return(
         <div className='whole-tile small-12'>
-          <NavLink to={`/show/${trip.id}/${trip.title}`}><TripIndexTile trip={trip} key={trip.id}/></NavLink>
+          <NavLink to={`/show/${trip.id}/`} onClick={this.handleClick}><TripIndexTile trip={trip} key={trip.id} id={trip.id}/></NavLink>
         </div>
       )
     })
@@ -31,6 +43,6 @@ class IndexContainer extends Component {
   }
 }
 
-const Index = connect(mapStateToProps)(IndexContainer)
+const Index = connect(mapStateToProps, mapDispatchToProps)(IndexContainer)
 
 export default Index
