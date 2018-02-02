@@ -2,7 +2,7 @@ class CreatePlaces < ActiveRecord::Migration[5.1]
   def change
     create_table :places do |t|
       t.belongs_to :trip, null: false
-      t.string :type, null: false, inclusion: { in: ["start", "end", "stop"] }
+      t.string :type, null: false
       t.string :google_place_id, null: false
       t.string :address
       t.string :name

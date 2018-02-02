@@ -3,10 +3,10 @@ import React from 'react'
 const TripDestinationTile = props => {
   let label
   let address
-  if (props.type === 'start') {
+  if (props.type === 'origin') {
     label = "Starting Location"
     address = props.location.address
-  } else if (props.type === 'end') {
+  } else if (props.type === 'final') {
     label = "Final Destination"
     address = props.location.address
   } else if (props.type === 'stops'){

@@ -8,8 +8,8 @@ const TripIndexTile = props => {
           <div className="column small-6 trip-description">{props.trip.description}</div>
         </div>
         {/* <ul> */}
-          {/* <div className="column small-12 locations start"><strong>Start: </strong>{props.trip.start.address}</div> */}
-          {/* <div className="column small-12 locations end"><strong>End: </strong>{props.trip.end.address}</div> */}
+          {/* <div className="column small-12 locations origin"><strong>Origin: </strong>{props.trip.origin.address}</div> */}
+          {/* <div className="column small-12 locations end"><strong>Final: </strong>{props.trip.end.address}</div> */}
         {/* </ul> */}
       </div>
   )

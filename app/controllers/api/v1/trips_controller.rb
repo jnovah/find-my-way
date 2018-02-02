@@ -61,7 +61,7 @@ class Api::V1::TripsController < ApplicationController
     trip = Trip.find(params[:id])
     if user.trips.en_route.length == 0
       trip.update(status: 'en route')
-      render json: { trip: trip, start: trip.start, end: trip.end, stops: trip.stops }
+      render json: { trip: trip, origin: trip.origin, final: trip.final, stops: trip.stops }
     else
       render json: { error: "You can only be on one trip at a time" }
     end

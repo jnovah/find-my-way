@@ -49,8 +49,8 @@ const trip = (state = initialState, action) => {
         en_route: action.trip.en_route,
         planning: action.trip.planning,
         mapBounds: action.trip.bounds,
-        origin: Object.assign({}, state.start, action.trip.start),
-        final: Object.assign({}, state.final, action.trip.end),
+        origin: Object.assign({}, state.origin, action.trip.origin),
+        final: Object.assign({}, state.final, action.trip.final),
         stops: action.trip.stops,
         legs: action.trip.legs
       })
