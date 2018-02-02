@@ -14,9 +14,9 @@ RSpec.describe Api::V1::DirectionsController, type: :controller do
 
 
   describe 'directions#origin_id' do
-    it 'should assign the start location as the origin for index 0' do
+    it 'should assign the origin location as the origin for index 0' do
       waypoint_order = [2,1,0,3]
-      expect(@controller.instance_eval{ origin_id(0, waypoint_order) }).to eq(trip.start.id)
+      expect(@controller.instance_eval{ origin_id(0, waypoint_order) }).to eq(trip.origin.id)
     end
 
     it 'should assign the origin_id based on the waypoint_order array' do

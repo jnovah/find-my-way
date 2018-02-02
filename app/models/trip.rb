@@ -1,7 +1,7 @@
 class Trip < ApplicationRecord
   belongs_to :user
-  has_one :start
-  has_one :end
+  has_one :origin
+  has_one :final
   has_many :stops
   has_many :places, dependent: :destroy
   has_many :legs, dependent: :destroy

@@ -1,7 +1,7 @@
-class End < Place
+class Origin < Place
   validates :trip_id, uniqueness: { scope: :type }
 
-  def final_create
+  def start_create
 
   end
 end

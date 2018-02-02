@@ -17,7 +17,7 @@ RSpec.describe Trip do
     end
 
     it "should have a starting location" do
-      expect(trip.places).to include(trip.start)
+      expect(trip.places).to include(trip.origin)
       expect(trip.places).to include(trip.end)
       expect(trip.places).to include(trip.stops[0])
       expect(trip.places).to include(trip.stops[1])
@@ -26,7 +26,7 @@ RSpec.describe Trip do
     end
 
     it "should create a starting location that is a child of Place" do
-      expect(trip.start).to be_a(Place)
+      expect(trip.origin).to be_a(Place)
     end
 
     it "should have an ending location that are a child of Place" do

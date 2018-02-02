@@ -34,7 +34,6 @@ class Api::V1::LegsController < ApplicationController
       routes = build_routes
       render json: { routes: routes, trip_complete: true }
     end
-
   end
 
 

@@ -4,14 +4,14 @@ class Api::V1::PlacesController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def start_create
-    start = Start.new(places_params)
-    if start.save
-      render json: {location: start, type: start.type}
+    origin = Origin.new(places_params)
+    if origin.save
+      render json: {location: origin, type: origin.type}
     end
   end
 
   def final_create
-    final = End.new(places_params)
+    final = Final.new(places_params)
     if final.save
       render json: {location: final, type: final.type}
     end
