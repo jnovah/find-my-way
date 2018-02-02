@@ -6,7 +6,7 @@ FactoryBot.define do
     factory :trip_with_places do
       after(:create) do |trip|
         create(:origin, trip: trip)
-        create(:end, trip: trip)
+        create(:final, trip: trip)
         create(:stop, trip: trip)
         create(:stop, trip: trip)
         create(:stop, trip: trip)
@@ -19,7 +19,7 @@ FactoryBot.define do
     address Faker::Address.street_address
   end
 
-  factory :end do
+  factory :final do
     address Faker::Address.street_address
   end
 
