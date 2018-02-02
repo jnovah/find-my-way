@@ -2,6 +2,7 @@ export const START_SUBMIT_FORM = 'START_SUBMIT_FORM'
 export const SUBMIT_FORM_SUCCESS = 'SUBMIT_FORM_SUCCESS'
 export const SET_TRIP_SHOW = 'SET_TRIP_SHOW'
 export const FORM_VALID = 'FORM_VALID'
+export const SET_PLACE_FORM = 'SET_PLACE_FORM'
 
 let startSubmitForm = () => {
   return {
@@ -37,6 +38,12 @@ let validateTripForm = (title, description) => dispatch => {
   }
 }
 
+let setPlaceForm = () => {
+  return {
+    type: SET_PLACE_FORM
+  }
+}
+
 let saveTrip = (payload, form) => dispatch => {
   return fetch('/api/v1/trips.json', {
     method: "POST",
@@ -57,5 +64,6 @@ let saveTrip = (payload, form) => dispatch => {
 
 export {
   validateTripForm,
-  saveTrip
+  saveTrip,
+  setPlaceForm
 }

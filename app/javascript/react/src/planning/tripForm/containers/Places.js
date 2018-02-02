@@ -1,18 +1,26 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import FormField from '../../../../sharedResources/constants/FormField'
+import { setPlaceAddress } from '../actions/setValue'
 
+const mapStateToProps = state => {
+  return {
+    place: state.tripForm.place
+  }
+}
 
-class Places extends Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    setPlaceAddress: (address) => { dispatch(setPlaceAddress(address)) }
+  }
+}
+
+class PlacesContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      address: '',
       type: '',
-      lat: '',
-      long: '',
-      placeId: '',
       name: '',
       errors: []
     }
@@ -27,7 +35,7 @@ class Places extends Component {
   }
 
   handleChange(event){
-    this.setState({ address: event })
+    this.props.setPlaceAddress(event)
   }
 
   handleSubmit(event) {
@@ -60,7 +68,7 @@ class Places extends Component {
 
   render(){
     let inputProps = {
-      value: this.state.address,
+      value: this.props.place.address,
       onChange: this.handleChange,
       placeholder: this.props.placeholder
     }
@@ -68,7 +76,7 @@ class Places extends Component {
     if (this.state.errors) {
       errors = this.state.errors
     }
-
+    console.log(this.props.place.address);
     return(
       <div className= "places-form-container">
         <div className="destination place">Seach for a location below by address or name</div>
@@ -77,8 +85,10 @@ class Places extends Component {
           <input className="btn btn-2 btn-2d submit-button place-submit" type='submit' name='Next' />
         </form>
       </div>
-  )
+    )
   }
 }
+
+const Places = connect(mapStateToProps, mapDispatchToProps)(PlacesContainer)
 
 export default Places
