@@ -7,8 +7,7 @@ let initialState = {
   placeForm: false,
   place: {
     address: '',
-    lat: '',
-    lng: '',
+    placePosition: {},
     placeID: ''
   }
 }

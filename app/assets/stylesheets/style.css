@@ -199,7 +199,7 @@ input[type=text] {
   text-align: center;
 }
 
-.location.start {
+.location.origin {
   margin-top: 10px;
   border-top-style: solid;
   border-top: #5E66BC;
@@ -365,7 +365,7 @@ input[type=text] {
   justify-content: center;
 }
 
-.start-trip-button {
+.origin-trip-button {
   display: flex;
   justify-content: center;
   align-items: center;

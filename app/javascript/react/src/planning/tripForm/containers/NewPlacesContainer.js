@@ -46,7 +46,7 @@ class NewPlaceFormContainer extends Component {
   render() {
     return(
       <div className="places-form-container">
-        <div className="trip-plan-container image">
+        <div className="trip-plan-container">
           <Places tripId={this.state.tripId} type={this.props.formType} placeholder='Add a starting location!' addNewPlace={this.addNewPlace}/>
         </div>
       </div>
