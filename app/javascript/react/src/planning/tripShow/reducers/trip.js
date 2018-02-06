@@ -19,7 +19,7 @@ let initialState = {
   completed: false,
   legs: [],
   class: '',
-  tripForm: false
+  tripForm: false,
 }
 
 const trip = (state = initialState, action) => {

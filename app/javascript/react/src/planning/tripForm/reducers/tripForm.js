@@ -1,5 +1,6 @@
 import { FORM_VALID, SUBMIT_FORM_SUCCESS, SET_PLACE_FORM } from '../actions/submitForms'
 import { SET_PLACE_ADDRESS } from '../actions/setValue'
+import { SET_GEOCODE, SET_PLACE_ID } from '../../tripShow/actions/getMap'
 
 let initialState = {
   tripFormValid: false,
@@ -9,7 +10,8 @@ let initialState = {
     address: '',
     placePosition: {},
     placeID: ''
-  }
+  },
+  placeComplete: false
 }
 
 const tripForm = (state = initialState, action) => {
@@ -23,8 +25,19 @@ const tripForm = (state = initialState, action) => {
     case SET_PLACE_FORM:
       return Object.assign({}, state, { placeForm: true })
     case SET_PLACE_ADDRESS:
-      let place = Object.assign({}, state.place, { address: action.address })
-      return Object.assign({}, state, { place: place })
+      return Object.assign({}, state, { place: Object.assign({}, state.place, { address: action.address }) })
+    case SET_GEOCODE:
+      return Object.assign({}, state, {
+        place: Object.assign({}, state.place, { placePosition: action.geocode }),
+        placeComplete: true
+      })
+    case SET_PLACE_ID:
+      return Object.assign({}, state, {
+        place: Object.assign({}, state.place, {
+          placeId: action.placeId,
+          address: action.address
+        }),
+      })
     default:
       return state
   }

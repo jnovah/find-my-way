@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { Switch, Route, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getTrip, newTripForm } from '../actions/tripShow'
+import { pingGoogle, initMap, getGeocode } from '../actions/getMap'
 import TripDestinationTile from '../components/TripDestinationTile'
 import Places from '../../tripForm/containers/Places'
+import MapTile from '../components/MapTile'
 
 const mapStateToProps = state => {
   return {
@@ -14,17 +16,16 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getTrip: (id) => { dispatch(getTrip(id)) },
-    newTripForm: () => { dispatch(newTripForm()) }
+    newTripForm: () => { dispatch(newTripForm()) },
+    pingGoogle: () => { dispatch(pingGoogle()) },
+    initMap: (center) => { dispatch(initMap(center))},
+    setOriginMap: (address) => { dispatch(setOriginMap(address)) }
   }
 }
 
 class TripShowContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      trip: {},
-      destinations: {}
-    }
     this.handleStopSubmit = this.handleStopSubmit.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
@@ -35,7 +36,7 @@ class TripShowContainer extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
   }
 
   handleStopSubmit(payLoad, type) {
@@ -74,7 +75,6 @@ class TripShowContainer extends Component {
     if (this.props.trip.completed || this.props.trip.tripForm) {
       className = 'hidden'
     }
-
     return(
       <div>
         <div className=''>
@@ -89,13 +89,14 @@ class TripShowContainer extends Component {
           <div id='final' className='destination-container row'>
             <TripDestinationTile type='final' location={this.props.trip.final} key='final'/>
           </div>
-          <div id='final' className='destination-container row'>{destination}
+          <div id='stop' className='destination-container row'>{destination}
           </div>
         </div>
         <div className={className}>
           <div className="destination place">Add a new Pit-Stop</div>
           <Places tripId={this.props.trip.currentTrip} type='stop' addNewPlace={this.handleStopSubmit}/>
         </div>
+        <MapTile/>
       </div>
     )
   }
