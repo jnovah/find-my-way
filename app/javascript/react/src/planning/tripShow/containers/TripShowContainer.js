@@ -83,13 +83,13 @@ class TripShowContainer extends Component {
           <div className={`${className} origin-trip-button `}>
             <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Origin Trip</button>
           </div>
-          <div id='origin' className='destination-container row'>
+          <div id='origin' className={`destination-container row ${this.props.trip.origin.length === 0 ? 'hidden' : ''}`}>
             <TripDestinationTile type='origin' location={this.props.trip.origin} key='origin'/>
           </div>
-          <div id='final' className='destination-container row'>
+          <div id='final' className={`destination-container row ${this.props.trip.final.length === 0 ? 'hidden' : ''}`}>
             <TripDestinationTile type='final' location={this.props.trip.final} key='final'/>
           </div>
-          <div id='stop' className='destination-container row'>{destination}
+          <div id='stop' className={`destination-container row `}>{destination}
           </div>
         </div>
         <div className={className}>

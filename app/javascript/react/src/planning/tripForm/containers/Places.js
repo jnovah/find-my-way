@@ -4,18 +4,22 @@ import { connect } from 'react-redux'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import { setPlaceAddress } from '../actions/setValue'
 import { getGeocode } from '../../tripShow/actions/getMap'
+import { savePlace } from '../actions/submitForms'
 
 const mapStateToProps = state => {
   return {
-    address: state.tripForm.place.address,
-    placeComplete: state.tripForm.placeComplete
+    place: state.tripForm.place,
+    placeComplete: state.tripForm.placeComplete,
+    tripId: state.trip.currentTrip,
+    formType: state.tripForm.formType
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     setPlaceAddress: (address) => { dispatch(setPlaceAddress(address)) },
-    getGeocode: (address) => { dispatch(getGeocode(address)) }
+    getGeocode: (address) => { dispatch(getGeocode(address)) },
+    savePlace: (address, tripId, type) => { dispatch(savePlace(address, tripId, type)) }
   }
 }
 
@@ -24,6 +28,7 @@ class PlacesContainer extends Component {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidUpdate() {
@@ -34,13 +39,18 @@ class PlacesContainer extends Component {
   }
 
   handleSelect(event) {
+    this.props.setPlaceAddress(event)
     this.props.getGeocode(event)
-    this.props.placeComplete
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.props.savePlace(this.props.place, this.props.tripId, this.props.formType)
   }
 
   render(){
     let inputProps = {
-      value: this.props.address,
+      value: this.props.place.address,
       onChange: this.handleChange
     }
 
@@ -49,7 +59,7 @@ class PlacesContainer extends Component {
         <div className="destination place">Seach for a location below by address or name</div>
         <form className='places-form' onSubmit={this.handleSubmit}>
           <div className='places-ac'><PlacesAutocomplete inputProps={inputProps} onSelect={this.handleSelect}/></div>
-          <input className="" type='submit' name='Next' />
+          <input className="" type='submit' value='Add & Continue' />
         </form>
       </div>
     )

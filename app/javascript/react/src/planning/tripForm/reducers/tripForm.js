@@ -1,4 +1,4 @@
-import { FORM_VALID, SUBMIT_FORM_SUCCESS, SET_PLACE_FORM } from '../actions/submitForms'
+import { FORM_VALID, SUBMIT_FORM_SUCCESS, SET_PLACE_FORM, SET_PLACE } from '../actions/submitForms'
 import { SET_PLACE_ADDRESS } from '../actions/setValue'
 import { SET_GEOCODE, SET_PLACE_ID } from '../../tripShow/actions/getMap'
 
@@ -9,7 +9,7 @@ let initialState = {
   place: {
     address: '',
     placePosition: {},
-    placeID: ''
+    placeId: ''
   },
   placeComplete: false
 }
@@ -36,7 +36,12 @@ const tripForm = (state = initialState, action) => {
         place: Object.assign({}, state.place, {
           placeId: action.placeId,
           address: action.address
-        }),
+        })
+      })
+    case SET_PLACE:
+      return Object.assign({}, state, {
+        place: initialState.place,
+        placeComplete: false
       })
     default:
       return state
