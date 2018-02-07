@@ -26,7 +26,6 @@ const mapDispatchToProps = dispatch => {
 class TripShowContainer extends Component {
   constructor(props) {
     super(props)
-    this.handleStopSubmit = this.handleStopSubmit.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -39,20 +38,6 @@ class TripShowContainer extends Component {
   componentDidMount() {
   }
 
-  handleStopSubmit(payLoad, type) {
-    fetch(`/api/v1/places/${type}_create.json`, {
-      method: "POST",
-      body: JSON.stringify(payLoad),
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}
-    })
-    .then(response => response.json())
-    .then(body => {
-      let currentState = Object.assign({}, this.state.destinations)
-      currentState.stops.push(body.location)
-      this.setState({ destinations: currentState })
-    })
-  }
 
   handleClick() {
     this.props.handleEnRoute(this.state.trip)
@@ -96,7 +81,7 @@ class TripShowContainer extends Component {
           <div className="destination place">Add a new Pit-Stop</div>
           <Places tripId={this.props.trip.currentTrip} type='stop' addNewPlace={this.handleStopSubmit}/>
         </div>
-        <MapTile/>
+
       </div>
     )
   }

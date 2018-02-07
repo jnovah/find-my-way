@@ -10,6 +10,7 @@ import trips from '../react/src/planning/tripIndex/reducers/allTrips'
 import trip from '../react/src/planning/tripShow/reducers/trip'
 import map from '../react/src/planning/tripShow/reducers/map'
 import tripForm from '../react/src/planning/tripForm/reducers/tripForm'
+import previewMap from '../react/src/planning/tripForm/reducers/previewMap'
 
 const middlewares = [thunkMiddleware]
 
@@ -19,7 +20,8 @@ const store = createStore(
     trips,
     trip,
     tripForm,
-    map
+    map,
+    previewMap
   }),
   applyMiddleware(...middlewares)
 )

@@ -3,7 +3,7 @@ export const SUBMIT_FORM_SUCCESS = 'SUBMIT_FORM_SUCCESS'
 export const SET_TRIP_SHOW = 'SET_TRIP_SHOW'
 export const FORM_VALID = 'FORM_VALID'
 export const SET_PLACE_FORM = 'SET_PLACE_FORM'
-export const SET_PLACE = 'SET_PLACE'
+export const SET_SAVED_PLACE = 'SET_SAVED_PLACE'
 
 let startSubmitForm = () => {
   return {
@@ -45,9 +45,9 @@ let setPlaceForm = () => {
   }
 }
 
-let setPlace = (place, placeType) => {
+let setSavedPlace = (place, placeType) => {
   return {
-    type: SET_PLACE,
+    type: SET_SAVED_PLACE,
     place,
     placeType
   }
@@ -72,7 +72,7 @@ let saveTrip = (payload, form) => dispatch => {
 }
 
 let savePlace = (place, tripId, type) => dispatch => {
-  let payload = { address: place.address, coordinates: place.placePosition, google_place_id: place.placeId, trip_id: tripId }
+  let payload = { address: place.address, coordinates: place.coordinates, google_place_id: place.placeId, trip_id: tripId }
   return fetch(`/api/v1/places/${type}_create.json`, {
     method: "POST",
     body: JSON.stringify(payload),
@@ -80,7 +80,7 @@ let savePlace = (place, tripId, type) => dispatch => {
     headers: {"Content-Type": "application/json"}
   }) .then(response => response.json())
   .then(place => {
-    dispatch(setPlace(place[Object.keys(place)[0]], type))
+    dispatch(setSavedPlace(place[Object.keys(place)[0]], type))
     dispatch(submitFormSuccess(type))
   })
 }
@@ -90,5 +90,5 @@ export {
   saveTrip,
   setPlaceForm,
   savePlace,
-  setPlace
+  setSavedPlace
 }

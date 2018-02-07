@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import { setPlaceAddress } from '../actions/setValue'
-import { getGeocode } from '../../tripShow/actions/getMap'
+import { getGeocode, initPreviewMap } from '../actions/getPreview'
 import { savePlace } from '../actions/submitForms'
 
 const mapStateToProps = state => {
@@ -11,7 +11,8 @@ const mapStateToProps = state => {
     place: state.tripForm.place,
     placeComplete: state.tripForm.placeComplete,
     tripId: state.trip.currentTrip,
-    formType: state.tripForm.formType
+    formType: state.tripForm.formType,
+    mapLoaded: state.previewMap.mapLoaded
   }
 }
 
@@ -19,7 +20,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setPlaceAddress: (address) => { dispatch(setPlaceAddress(address)) },
     getGeocode: (address) => { dispatch(getGeocode(address)) },
-    savePlace: (address, tripId, type) => { dispatch(savePlace(address, tripId, type)) }
+    savePlace: (address, tripId, type) => { dispatch(savePlace(address, tripId, type)) },
+    initPreviewMap: (coordinates) => { dispatch(initPreviewMap(coordinates)) }
   }
 }
 
@@ -31,7 +33,8 @@ class PlacesContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    !prevProps.placeComplete && this.props.placeComplete && !this.props.mapLoaded ? this.props.initPreviewMap(this.props.place.coordinates) : null
   }
 
   handleChange(event){
@@ -40,7 +43,7 @@ class PlacesContainer extends Component {
 
   handleSelect(event) {
     this.props.setPlaceAddress(event)
-    this.props.getGeocode(event)
+    this.props.placeComplete ? this.props.getGeocode(event, 'update') : this.props.getGeocode(event)
   }
 
   handleSubmit(event) {

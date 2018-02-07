@@ -35,6 +35,8 @@ class NewTripContainer extends Component {
     if (this.props.formType == 'origin' && !this.props.placeForm) {
       this.props.setPlaceForm()
       this.props.history.push(`${this.props.match.path}${this.props.formType}/`)
+    } else if (this.props.formType === 'final') {
+      this.props.history.push(`${this.props.match.path}${this.props.formType}/`)
     }
   }
 

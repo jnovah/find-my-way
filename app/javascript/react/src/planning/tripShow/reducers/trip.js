@@ -1,5 +1,5 @@
 import { TOGGLE_TRIP, FETCH_TRIP, FETCH_TRIP_SUCCESS, HAS_LEGS, COMPLETED_TRIP, NEW_TRIP_FORM } from '../actions/tripShow'
-import { SET_TRIP_SHOW, SET_PLACE } from '../../tripForm/actions/submitForms'
+import { SET_TRIP_SHOW, SET_SAVED_PLACE } from '../../tripForm/actions/submitForms'
 import { SET_TEXT_VALUE } from '../../tripForm/actions/setValue'
 
 let initialState = {
@@ -63,7 +63,7 @@ const trip = (state = initialState, action) => {
       })
       case SET_TEXT_VALUE:
         return Object.assign({}, state, { [action.inputType]: action.value })
-      case SET_PLACE:
+      case SET_SAVED_PLACE:
         switch (action.placeType) {
           case 'show':
             return Object.assign({}, state, { stops: [...state.stops, action.place.stop] })
