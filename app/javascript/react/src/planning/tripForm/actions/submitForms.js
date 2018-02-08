@@ -5,7 +5,15 @@ export const SET_TRIP_SHOW = 'SET_TRIP_SHOW'
 export const FORM_VALID = 'FORM_VALID'
 export const SET_PLACE_FORM = 'SET_PLACE_FORM'
 export const SET_SAVED_PLACE = 'SET_SAVED_PLACE'
+export const SELECTION_CHANGED = 'SELECTION_CHANGED'
+
 export const FORM_ORDER = { trip: 'origin', origin: 'final', final: 'show' }
+
+let selectionChanged = () => {
+  return {
+    type: SELECTION_CHANGED
+  }
+}
 
 let startPlaceFormSubmission = () => {
   return {
@@ -99,5 +107,6 @@ export {
   saveTrip,
   setPlaceForm,
   savePlace,
-  setSavedPlace
+  setSavedPlace,
+  selectionChanged
 }

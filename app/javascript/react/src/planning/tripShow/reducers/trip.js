@@ -1,4 +1,4 @@
-import { TOGGLE_TRIP, FETCH_TRIP, FETCH_TRIP_SUCCESS, HAS_LEGS, COMPLETED_TRIP, NEW_TRIP_FORM } from '../actions/tripShow'
+import { TOGGLE_TRIP, FETCH_TRIP, FETCH_TRIP_SUCCESS, HAS_LEGS, COMPLETED_TRIP, NEW_TRIP_FORM, TRIP_FORM_COMPLETE } from '../actions/tripShow'
 import { SET_TRIP_SHOW, SET_SAVED_PLACE } from '../../tripForm/actions/submitForms'
 import { SET_TEXT_VALUE } from '../../tripForm/actions/setValue'
 
@@ -56,6 +56,8 @@ const trip = (state = initialState, action) => {
       })
     case NEW_TRIP_FORM:
       return Object.assign({}, state, initialState, { tripForm: true })
+    case TRIP_FORM_COMPLETE:
+      return Object.assign({}, state, { tripForm: false })
     case SET_TRIP_SHOW:
       return Object.assign({}, state, {
         currentTrip: action.trip.id,

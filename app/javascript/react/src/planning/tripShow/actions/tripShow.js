@@ -4,10 +4,17 @@ export const FETCH_TRIP_SUCCESS = 'FETCH_TRIP_SUCCESS'
 export const HAS_LEGS = 'NO_LEGS'
 export const COMPLETED_TRIP = 'COMPLETED_TRIP'
 export const NEW_TRIP_FORM = 'NEW_TRIP_FORM'
+export const TRIP_FORM_COMPLETE = 'TRIP_FORM_COMPLETE'
 
 let newTripForm = () => {
   return {
     type: NEW_TRIP_FORM
+  }
+}
+
+let tripFormComplete = () => {
+  return {
+    type: TRIP_FORM_COMPLETE
   }
 }
 
@@ -63,5 +70,6 @@ export {
   fetchTripSuccess,
   hasLegs,
   getTrip,
-  newTripForm
+  newTripForm,
+  tripFormComplete
 }

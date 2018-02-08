@@ -1,4 +1,4 @@
-import { FORM_ORDER, FORM_VALID, SUBMIT_FORM_SUCCESS, SET_PLACE_FORM, SET_SAVED_PLACE, START_PLACE_FORM_SUBMISSION, PLACE_FORM_SUBMISSION_SUCCESS } from '../actions/submitForms'
+import { FORM_ORDER, FORM_VALID, SUBMIT_FORM_SUCCESS, SET_PLACE_FORM, SET_SAVED_PLACE, START_PLACE_FORM_SUBMISSION, PLACE_FORM_SUBMISSION_SUCCESS, SELECTION_CHANGED } from '../actions/submitForms'
 import { SET_PLACE_ADDRESS } from '../actions/setValue'
 import { SET_GEOCODE, SET_PLACE_ID } from '../actions/getPreview'
 
@@ -12,7 +12,8 @@ let initialState = {
     placeId: ''
   },
   placeComplete: false,
-  submittingPlaceForm: false
+  submittingPlaceForm: false,
+  placeSelected: false
 }
 
 const tripForm = (state = initialState, action) => {
@@ -30,8 +31,11 @@ const tripForm = (state = initialState, action) => {
     case SET_GEOCODE:
       return Object.assign({}, state, {
         place: Object.assign({}, state.place, { coordinates: action.geocode }),
-        placeComplete: true
+        placeComplete: true,
+        placeSelected: true
       })
+    case SELECTION_CHANGED:
+      return Object.assign({}, state, { placeSelected: false })
     case SET_PLACE_ID:
       return Object.assign({}, state, {
         place: Object.assign({}, state.place, {

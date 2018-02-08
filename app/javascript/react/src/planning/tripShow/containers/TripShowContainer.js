@@ -57,7 +57,7 @@ class TripShowContainer extends Component {
         <TripDestinationTile type='stops' location={stop} key={`stop${index}`}/>
       )
     })
-    if (this.props.trip.completed || this.props.trip.tripForm) {
+    if (this.props.trip.tripForm) {
       className = 'hidden'
     }
     return(
@@ -65,8 +65,9 @@ class TripShowContainer extends Component {
         <div className=''>
           <h1>{this.props.trip.title}</h1>
           <div className="destination">{this.props.trip.description}</div>
-          <div className={`${className} origin-trip-button `}>
-            <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Origin Trip</button>
+          <div className={this.props.trip.tripForm ? 'hidden' : ''}>
+            <div className="destination place">Add a new Pit-Stop</div>
+            <Places tripId={this.props.trip.currentTrip} type='stop'/>
           </div>
           <div id='origin' className={`destination-container row ${this.props.trip.origin.length === 0 ? 'hidden' : ''}`}>
             <TripDestinationTile type='origin' location={this.props.trip.origin} key='origin'/>
@@ -77,11 +78,9 @@ class TripShowContainer extends Component {
           <div id='stop' className={`destination-container row `}>{destination}
           </div>
         </div>
-        <div className={className}>
-          <div className="destination place">Add a new Pit-Stop</div>
-          <Places tripId={this.props.trip.currentTrip} type='stop' addNewPlace={this.handleStopSubmit}/>
+        <div className={`${this.props.trip.tripForm ? 'hidden' : ''} start-trip-button `}>
+          <button className='btn btn-4 btn-4c add-new' onClick={this.handleClick}>Start Trip</button>
         </div>
-
       </div>
     )
   }

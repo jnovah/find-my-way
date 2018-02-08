@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import { setPlaceAddress } from '../actions/setValue'
 import { getGeocode, initPreviewMap } from '../actions/getPreview'
-import { savePlace } from '../actions/submitForms'
+import { savePlace, selectionChanged } from '../actions/submitForms'
 
 const mapStateToProps = state => {
   return {
@@ -13,7 +13,8 @@ const mapStateToProps = state => {
     tripId: state.trip.currentTrip,
     formType: state.tripForm.formType,
     mapLoaded: state.previewMap.mapLoaded,
-    submittingPlaceForm: state.tripForm.submittingPlaceForm
+    submittingPlaceForm: state.tripForm.submittingPlaceForm,
+    placeSelected: state.tripForm.placeSelected
   }
 }
 
@@ -22,7 +23,8 @@ const mapDispatchToProps = dispatch => {
     setPlaceAddress: (address) => { dispatch(setPlaceAddress(address)) },
     getGeocode: (address) => { dispatch(getGeocode(address)) },
     savePlace: (address, tripId, type) => { dispatch(savePlace(address, tripId, type)) },
-    initPreviewMap: (coordinates) => { dispatch(initPreviewMap(coordinates)) }
+    initPreviewMap: (coordinates) => { dispatch(initPreviewMap(coordinates)) },
+    selectionChanged: () => { dispatch(selectionChanged()) }
   }
 }
 
@@ -50,6 +52,7 @@ class PlacesContainer extends Component {
 
   handleChange(event){
     this.props.setPlaceAddress(event)
+    this.props.placeSelected ? this.props.selectionChanged() : null
   }
 
   handleSelect(event) {
@@ -59,7 +62,7 @@ class PlacesContainer extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.savePlace(this.props.place, this.props.tripId, this.props.formType)
+    this.props.placeSelected ? this.props.savePlace(this.props.place, this.props.tripId, this.props.formType) : null
   }
 
   render(){

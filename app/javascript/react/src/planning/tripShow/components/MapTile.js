@@ -29,8 +29,8 @@ class MapTileContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    !prevProps.originMarker && this.props.mapLoaded && this.props.placeComplete ?  this.props.setOriginMarker(this.props.place.placePosition, this.props.place.address, this.props.map)
-    : prevProps.formType === this.props.formType && this.props.formType !== 'show' && !!prevProps.originMarker && prevProps.place.placePosition !== this.props.place.placePosition ? this.props.updateOriginMarker()
+    !prevProps.originMarker && this.props.mapLoaded && this.props.placeComplete ?  this.props.setOriginMarker(this.props.place.coordinates, this.props.place.address, this.props.map)
+    : prevProps.formType === this.props.formType && this.props.formType !== 'show' && !!prevProps.originMarker && prevProps.place.coordinates !== this.props.place.coordinates ? this.props.updateOriginMarker()
     : null
   }
 
