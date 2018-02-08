@@ -13,7 +13,8 @@ const mapStateToProps = state => {
     previewMap: state.previewMap.previewMap,
     previewMarker: state.previewMap.marker,
     place: state.tripForm.place,
-    markerUpdating: state.previewMap.markerUpdating
+    markerUpdating: state.previewMap.markerUpdating,
+    submittingPlaceForm: state.tripForm.submittingPlaceForm
   }
 }
 
@@ -35,11 +36,21 @@ class NewPlaceFormContainer extends Component {
     this.props.pingGoogle()
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.submittingPlaceForm) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    !prevProps.mapLoaded && this.props.mapLoaded ? this.props.setMarker(this.props.place.coordinates, this.props.place.address, this.props.previewMap)
-    : !!prevProps.previewMarker && this.props.place.coordinates !== prevProps.place.coordinates ? this.moveMarker(this.props.place.coordinates, this.props.place.address, this.props.previewMap)
-    : prevProps.previewMarker.position !== this.props.previewMarker.position && this.props.mapLoaded && !!this.props.previewMap ? this.props.previewMap.panTo(this.props.previewMarker.position)
-    : null
+    if (!prevProps.submittingPlaceForm) {
+      !prevProps.mapLoaded && this.props.mapLoaded ? this.props.setMarker(this.props.place.coordinates, this.props.place.address, this.props.previewMap)
+      : !!prevProps.previewMarker && this.props.place.coordinates !== prevProps.place.coordinates ? this.moveMarker(this.props.place.coordinates, this.props.place.address, this.props.previewMap)
+      : prevProps.previewMarker.position !== this.props.previewMarker.position && this.props.mapLoaded && !!this.props.previewMap ? this.props.previewMap.panTo(this.props.previewMarker.position)
+      : null
+    }
   }
 
   moveMarker() {

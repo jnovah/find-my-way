@@ -12,7 +12,8 @@ const mapStateToProps = state => {
     placeComplete: state.tripForm.placeComplete,
     tripId: state.trip.currentTrip,
     formType: state.tripForm.formType,
-    mapLoaded: state.previewMap.mapLoaded
+    mapLoaded: state.previewMap.mapLoaded,
+    submittingPlaceForm: state.tripForm.submittingPlaceForm
   }
 }
 
@@ -33,8 +34,18 @@ class PlacesContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.submittingPlaceForm) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   componentDidUpdate(prevProps) {
-    !prevProps.placeComplete && this.props.placeComplete && !this.props.mapLoaded ? this.props.initPreviewMap(this.props.place.coordinates) : null
+    if (!prevProps.submittingPlaceForm) {
+      !prevProps.placeComplete && this.props.placeComplete && !this.props.mapLoaded ? this.props.initPreviewMap(this.props.place.coordinates) : null
+    }
   }
 
   handleChange(event){
