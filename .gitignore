@@ -22,3 +22,5 @@
 /node_modules
 /coverage
 .env
+public/packs/manifest.json
+app/assets/config/manifest.js

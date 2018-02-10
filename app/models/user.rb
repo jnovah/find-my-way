@@ -1,10 +1,6 @@
 class User < ApplicationRecord
   has_many :trips
 
-  def user_id
-
-  end
-
   def self.find_or_create_from_auth_hash(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider = auth.provider
@@ -15,5 +11,9 @@ class User < ApplicationRecord
       user.picture = auth.info.image
       user.save
     end
+  end
+
+  def full_name
+    first_name + " " + last_name
   end
 end

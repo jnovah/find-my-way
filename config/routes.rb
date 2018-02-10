@@ -22,9 +22,10 @@ Rails.application.routes.draw do
       resources :trips
       resources :trips, only: [:show] do
         resources :legs, only: [:create, :update]
+        resources :directions, only: [:create]
       end
 
-      post '/places/start_create'
+      post '/places/origin_create'
       post '/places/final_create'
       post '/places/stop_create'
       resources :places, only: [:show, :update, :destroy]

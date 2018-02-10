@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route, NavLink } from 'react-router-dom'
-import TopBar from './TopBar'
+import TopBar from '../TopBar'
 import EnRouteDirectionsContainer from './enRoute/EnRouteDirectionsContainer'
 
 class EnRoute extends Component {

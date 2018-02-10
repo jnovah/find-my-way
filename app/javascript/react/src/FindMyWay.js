@@ -1,53 +1,67 @@
 import React, { Component } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import PlanMyTrip from './containers/PlanMyTrip'
-import EnRoute from './containers/EnRoute'
+import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-class FindMyWay extends Component {
+import TopBar from './TopBar'
+import PlanMyTrip from './planning/PlanMyTrip'
+import TripShow from './planning/tripShow/containers/TripShowContainer'
+import EnRoute from './containers/EnRoute'
+import { getAllTrips } from './planning/tripIndex/actions/getAllTrips'
+
+const mapStateToProps = state => {
+  return {
+    isFetching: state.trips.isFetching,
+    class: state.trips.class,
+    trips: state.trips.trips
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getAllTrips: () => { dispatch(getAllTrips()) }
+  }
+}
+
+class FindMyWayContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      enRoute: false,
-      trip: {},
-      routes: []
-    }
-    this.handleEnRoute = this.handleEnRoute.bind(this)
-    this.handleTripComplete = this.handleTripComplete.bind(this)
   }
 
-  componentDidMount() {
-    fetch('/api/v1/trips/check_en_route.json', {
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}
-    }) .then(response => response.json())
-    .then(body => {
-      if (body.en_route) {
-        this.setState({ enRoute: true })
-      }
-    })
+  componentWillMount() {
+    this.props.getAllTrips()
   }
 
-  handleTripComplete() {
-    this.setState({ enRoute: false })
-  }
-
-  handleEnRoute() {
-    this.setState({ enRoute: true })
+  componentDidUpdate() {
   }
 
   render(){
-    let renderComponent
-    if (this.state.enRoute) {
-      renderComponent = <BrowserRouter><EnRoute trip={this.state.trip} handleTripComplete={this.handleTripComplete} /></BrowserRouter>
-    } else {
-      renderComponent = <BrowserRouter><PlanMyTrip handleEnRoute={this.handleEnRoute} /></BrowserRouter>
-    }
+
     return(
-      <div className="">
-        {renderComponent}
+      <div>
+        <BrowserRouter>
+          <div>
+            <TopBar />
+            <Switch>
+              <Route strict path='/show/:id/' render={props =>(<TripShow handleEnRoute={this.handleEnRoute} {...props} />)} />
+              <Route strict path='/trips/' component={PlanMyTrip} />
+              <div>
+                <h1>Welcome to <strong>Find My Way</strong>!</h1>
+                <p><strong>Find My Way</strong> is your ultimate road trip planning app!</p>
+                <div className={`${this.props.class}`}>
+                  <NavLink to='/trips/'><button className="btn btn-4 btn-4c add-new">Continue!</button></NavLink>
+                </div>
+              </div>
+            </Switch>
+          </div>
+        </BrowserRouter>
       </div>
     )
   }
 }
+
+const FindMyWay = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FindMyWayContainer)
 
 export default FindMyWay

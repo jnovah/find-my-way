@@ -4,20 +4,14 @@ class Api::V1::TripsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
 
   def index
-    user = current_user
-    trips = []
-    user.trips.each do |trip|
-      if trip.start && trip.end
-        trips.push(trip)
-      end
-    end
+    trips = Trip.where(user_id: current_user.id)
     render json: trips
   end
 
   def show
     trip = Trip.find(params[:id])
     if trip.user == current_user
-      render json: { trip: trip, destinations: { start: trip.start, end: trip.end, stops: trip.stops } }
+      render json: trip
     else
       render json: { error: "You do not have access to this trip" }
     end
@@ -26,7 +20,7 @@ class Api::V1::TripsController < ApplicationController
   def complete
     trip = Trip.find(params[:id])
     trip.update(status: "completed")
-    render json: {status: "complete"}
+    render json: { status: "complete" }
   end
 
   def create
@@ -37,7 +31,7 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def check_en_route
-    if trip = Trip.find_by(status: 'en route', user_id: current_user.id)
+    if trip = Trip.find_by(en_route: true, user_id: current_user.id)
       render json: { en_route: true }
     else
       render json: { en_route: false }
@@ -45,7 +39,7 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def get_en_route
-    trip = Trip.find_by(status: 'en route', user_id: current_user.id)
+    trip = Trip.find_by(en_route: true, user_id: current_user.id)
     legs = trip.legs
     routes = []
     count = 0
@@ -67,7 +61,7 @@ class Api::V1::TripsController < ApplicationController
     trip = Trip.find(params[:id])
     if user.trips.en_route.length == 0
       trip.update(status: 'en route')
-      render json: { trip: trip, start: trip.start, end: trip.end, stops: trip.stops }
+      render json: { trip: trip, origin: trip.origin, final: trip.final, stops: trip.stops }
     else
       render json: { error: "You can only be on one trip at a time" }
     end
@@ -77,6 +71,6 @@ class Api::V1::TripsController < ApplicationController
 
 
   def trip_params
-    params.require(:trip).permit(:title, :description, :status)
+    params.require(:trip).permit(:title, :description)
   end
 end

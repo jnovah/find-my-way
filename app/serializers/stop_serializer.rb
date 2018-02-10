@@ -1,3 +1,3 @@
 class StopSerializer < ActiveModel::Serializer
-  attributes :id, :address, :lat, :long
+  attributes :id, :address, :coordinates, :google_place_id
 end
