@@ -17,14 +17,20 @@ FactoryBot.define do
 
   factory :origin do
     address Faker::Address.street_address
+    coordinates "something"
+    google_place_id Faker::Bitcoin.testnet_address
   end
 
   factory :final do
     address Faker::Address.street_address
+    coordinates "something"
+    google_place_id Faker::Bitcoin.testnet_address
   end
 
   factory :stop do
     address Faker::Address.street_address
+    coordinates "something"
+    google_place_id Faker::Bitcoin.testnet_address
   end
 
   trait :planning do

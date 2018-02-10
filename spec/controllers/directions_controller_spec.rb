@@ -39,7 +39,7 @@ RSpec.describe Api::V1::DirectionsController, type: :controller do
 
     it 'should assign the trip.end.id for the final index argument' do
       waypoint_order = [2,1,0,3]
-      expect(@controller.instance_eval{ destination_id(4 , waypoint_order) }).to eq(trip.end.id)
+      expect(@controller.instance_eval{ destination_id(4 , waypoint_order) }).to eq(trip.final.id)
     end
   end
 end
