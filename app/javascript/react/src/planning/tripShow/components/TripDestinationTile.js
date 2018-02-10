@@ -9,7 +9,7 @@ const TripDestinationTile = props => {
   } else if (props.type === 'final') {
     label = "Final Destination"
     address = props.location.address
-  } else if (props.type === 'stops'){
+  } else if (props.type === 'stop'){
     label = "Pit-Stop"
     address = props.location.address
   }

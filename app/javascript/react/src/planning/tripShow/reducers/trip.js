@@ -67,8 +67,8 @@ const trip = (state = initialState, action) => {
         return Object.assign({}, state, { [action.inputType]: action.value })
       case SET_SAVED_PLACE:
         switch (action.placeType) {
-          case 'show':
-            return Object.assign({}, state, { stops: [...state.stops, action.place.stop] })
+          case 'stop':
+            return Object.assign({}, state, { stops: [...state.stops, action.place] })
           default:
             return Object.assign({}, state, { [action.placeType]: action.place })
         }

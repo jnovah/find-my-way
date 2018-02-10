@@ -8,7 +8,7 @@ import thunkMiddleware from 'redux-thunk'
 import currentUser from '../react/sharedResources/reducers/currentUser'
 import trips from '../react/src/planning/tripIndex/reducers/allTrips'
 import trip from '../react/src/planning/tripShow/reducers/trip'
-import map from '../react/src/planning/tripShow/reducers/map'
+import directionsMap from '../react/src/planning/tripShow/reducers/directionsMap'
 import tripForm from '../react/src/planning/tripForm/reducers/tripForm'
 import previewMap from '../react/src/planning/tripForm/reducers/previewMap'
 
@@ -20,7 +20,7 @@ const store = createStore(
     trips,
     trip,
     tripForm,
-    map,
+    directionsMap,
     previewMap
   }),
   applyMiddleware(...middlewares)

@@ -1,4 +1,4 @@
-import { FORM_ORDER, FORM_VALID, SUBMIT_FORM_SUCCESS, SET_PLACE_FORM, SET_SAVED_PLACE, START_PLACE_FORM_SUBMISSION, PLACE_FORM_SUBMISSION_SUCCESS, SELECTION_CHANGED } from '../actions/submitForms'
+import { FORM_ORDER, FORM_VALID, SUBMIT_FORM_SUCCESS, SET_PLACE_FORM, SET_SAVED_PLACE, START_PLACE_FORM_SUBMISSION, PLACE_FORM_SUBMISSION_SUCCESS, SELECTION_CHANGED, SET_FORM_TYPE } from '../actions/submitForms'
 import { SET_PLACE_ADDRESS } from '../actions/setValue'
 import { SET_GEOCODE, SET_PLACE_ID } from '../actions/getPreview'
 
@@ -57,6 +57,8 @@ const tripForm = (state = initialState, action) => {
         formType: FORM_ORDER[action.formType],
         submittingPlaceForm: false
       })
+    case SET_FORM_TYPE:
+      return Object.assign({}, state, { formType: action.formType })
     default:
       return state
   }

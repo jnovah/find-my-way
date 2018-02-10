@@ -6,8 +6,16 @@ export const FORM_VALID = 'FORM_VALID'
 export const SET_PLACE_FORM = 'SET_PLACE_FORM'
 export const SET_SAVED_PLACE = 'SET_SAVED_PLACE'
 export const SELECTION_CHANGED = 'SELECTION_CHANGED'
+export const SET_FORM_TYPE = 'SET_FORM_TYPE'
 
 export const FORM_ORDER = { trip: 'origin', origin: 'final', final: 'show' }
+
+let setFormType = formType => {
+  return {
+    type: SET_FORM_TYPE,
+    formType
+  }
+}
 
 let selectionChanged = () => {
   return {
@@ -108,5 +116,6 @@ export {
   setPlaceForm,
   savePlace,
   setSavedPlace,
-  selectionChanged
+  selectionChanged,
+  setFormType
 }

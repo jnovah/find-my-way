@@ -5,6 +5,7 @@ import Places from './Places'
 import PlacesEndpointTile from '../components/PlacesEndpointTile'
 import PreviewMapTile from '../components/PreviewMapTile'
 import { initPreviewMap, pingGoogle, setMarker, updateMarker } from '../actions/getPreview'
+import { setFormType } from '../actions/submitForms'
 
 const mapStateToProps = state => {
   return {
@@ -22,7 +23,8 @@ const mapDispatchToProps = dispatch => {
   return {
     pingGoogle: () => { dispatch(pingGoogle()) },
     setMarker: (coordinates, address, map) => { dispatch(setMarker(coordinates, address, map)) },
-    updateMarker: (coordinates, address, map) => { dispatch(updateMarker(coordinates, address, map)) }
+    updateMarker: (coordinates, address, map) => { dispatch(updateMarker(coordinates, address, map)) },
+    setFormType: (type) => { dispatch(setFormType(type)) }
   }
 }
 
@@ -30,6 +32,16 @@ class NewPlaceFormContainer extends Component {
   constructor(props) {
     super(props)
     this.moveMarker = this.moveMarker.bind(this)
+  }
+
+  componentWillMount() {
+    switch (this.props.type) {
+      case 'stop':
+        this.props.setFormType('stop')
+        break;
+      default:
+        return null
+    }
   }
 
   componentDidMount() {
@@ -50,6 +62,8 @@ class NewPlaceFormContainer extends Component {
       : !!prevProps.previewMarker && this.props.place.coordinates !== prevProps.place.coordinates ? this.moveMarker(this.props.place.coordinates, this.props.place.address, this.props.previewMap)
       : prevProps.previewMarker.position !== this.props.previewMarker.position && this.props.mapLoaded && !!this.props.previewMap ? this.props.previewMap.panTo(this.props.previewMarker.position)
       : null
+    } else if (prevProps.submittingPlaceForm) {
+      debugger
     }
   }
 
@@ -64,7 +78,9 @@ class NewPlaceFormContainer extends Component {
       <div className="places-form-container">
         <div className="trip-plan-container">
           <Places />
-          <PreviewMapTile />
+          <div className={!this.props.previewMap ? 'hidden' : ''}>
+            <PreviewMapTile />
+          </div>
         </div>
       </div>
     )

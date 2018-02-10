@@ -16,6 +16,11 @@ h1 {
   width: 200px;
 }
 
+#directions-map {
+  height: 500px;
+  width: 500px;
+}
+
 #map.hidden {
   height: 0;
 }
