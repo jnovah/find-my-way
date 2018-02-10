@@ -22,7 +22,6 @@ class IndexContainer extends Component {
   }
 
   handleClick(event) {
-    debugger
     this.props.toggleTrip(event.target.id)
   }
 

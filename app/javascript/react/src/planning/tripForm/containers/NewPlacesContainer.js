@@ -62,9 +62,7 @@ class NewPlaceFormContainer extends Component {
       : !!prevProps.previewMarker && this.props.place.coordinates !== prevProps.place.coordinates ? this.moveMarker(this.props.place.coordinates, this.props.place.address, this.props.previewMap)
       : prevProps.previewMarker.position !== this.props.previewMarker.position && this.props.mapLoaded && !!this.props.previewMap ? this.props.previewMap.panTo(this.props.previewMarker.position)
       : null
-    } else if (prevProps.submittingPlaceForm) {
-      debugger
-    }
+    } 
   }
 
   moveMarker() {

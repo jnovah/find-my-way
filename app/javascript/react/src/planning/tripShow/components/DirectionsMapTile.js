@@ -40,9 +40,6 @@ class DirectionsMapTileContainer extends Component {
     : this.props.mapLoaded && !prevProps.mapLoaded ? this.props.initDirectionsRenderer(this.props.origin.coordinates, this.props.destination.coordinates)
     : !!this.props.directionsDisplay && !prevProps.directionsDisplay ? this.props.directionsDisplay.setMap(this.props.map)
     : null
-    if (!!this.props.directionsDisplay && !prevProps.directionsDisplay) {
-      debugger
-    }
   }
 
   render() {
