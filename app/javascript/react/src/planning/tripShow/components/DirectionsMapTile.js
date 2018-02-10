@@ -11,7 +11,8 @@ const mapStateToProps = state => {
     origin: state.trip.origin,
     destination: state.trip.final,
     stops: state.trip.stops,
-    directionsDisplay: state.directionsMap.directionsDisplay
+    directionsDisplay: state.directionsMap.directionsDisplay,
+    tripForm: state.trip.tripForm
   }
 }
 
@@ -32,13 +33,19 @@ class DirectionsMapTileContainer extends Component {
     this.props.pingGoogle()
   }
 
-  componentDidMount(){
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.tripForm) {
+      return false
+    } else {
+      return true
+    }
   }
 
   componentDidUpdate(prevProps) {
     !!this.props.origin.coordinates && !prevProps.origin.coordinates ? this.props.initMap(this.props.origin.coordinates)
     : this.props.mapLoaded && !prevProps.mapLoaded ? this.props.initDirectionsRenderer(this.props.origin.coordinates, this.props.destination.coordinates)
     : !!this.props.directionsDisplay && !prevProps.directionsDisplay ? this.props.directionsDisplay.setMap(this.props.map)
+    : prevProps.tripForm && !this.props.tripForm ? this.props.initMap(this.props.origin.coordinates)
     : null
   }
 
