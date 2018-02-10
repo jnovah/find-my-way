@@ -10,7 +10,8 @@ const mapStateToProps = state => {
     title: state.trip.title,
     description: state.trip.description,
     valid: state.tripForm.tripFormValid,
-    currentTrip: state.trip.currentTrip
+    currentTrip: state.trip.currentTrip,
+    formType: state.tripForm.formType
   }
 }
 
@@ -30,7 +31,7 @@ class NewTripFormContainer extends Component {
   }
 
   componentDidUpdate() {
-    this.props.validateTripForm(this.props.title, this.props.description)
+    !this.props.valid ? this.props.validateTripForm(this.props.title, this.props.description) : null
   }
 
   handleChange(event) {
@@ -62,7 +63,7 @@ class NewTripFormContainer extends Component {
             key='description'
             className='trip-description'
             type='text'
-            label='All the best trips start with a story'
+            label='All the best trips origin with a story'
             name='description'
             value={this.props.description}
             handleChange={this.handleChange}

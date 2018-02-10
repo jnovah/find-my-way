@@ -1,5 +1,5 @@
-import { TOGGLE_TRIP, FETCH_TRIP, FETCH_TRIP_SUCCESS, HAS_LEGS, COMPLETED_TRIP, NEW_TRIP_FORM } from '../actions/tripShow'
-import { SET_TRIP_SHOW } from '../../tripForm/actions/submitForms'
+import { TOGGLE_TRIP, FETCH_TRIP, FETCH_TRIP_SUCCESS, HAS_LEGS, COMPLETED_TRIP, NEW_TRIP_FORM, TRIP_FORM_COMPLETE } from '../actions/tripShow'
+import { SET_TRIP_SHOW, SET_SAVED_PLACE } from '../../tripForm/actions/submitForms'
 import { SET_TEXT_VALUE } from '../../tripForm/actions/setValue'
 
 let initialState = {
@@ -19,7 +19,7 @@ let initialState = {
   completed: false,
   legs: [],
   class: '',
-  tripForm: false
+  tripForm: false,
 }
 
 const trip = (state = initialState, action) => {
@@ -49,13 +49,15 @@ const trip = (state = initialState, action) => {
         en_route: action.trip.en_route,
         planning: action.trip.planning,
         mapBounds: action.trip.bounds,
-        origin: Object.assign({}, state.start, action.trip.start),
-        final: Object.assign({}, state.final, action.trip.end),
+        origin: Object.assign({}, state.origin, action.trip.origin),
+        final: Object.assign({}, state.final, action.trip.final),
         stops: action.trip.stops,
         legs: action.trip.legs
       })
     case NEW_TRIP_FORM:
       return Object.assign({}, state, initialState, { tripForm: true })
+    case TRIP_FORM_COMPLETE:
+      return Object.assign({}, state, { tripForm: false })
     case SET_TRIP_SHOW:
       return Object.assign({}, state, {
         currentTrip: action.trip.id,
@@ -63,6 +65,13 @@ const trip = (state = initialState, action) => {
       })
       case SET_TEXT_VALUE:
         return Object.assign({}, state, { [action.inputType]: action.value })
+      case SET_SAVED_PLACE:
+        switch (action.placeType) {
+          case 'stop':
+            return Object.assign({}, state, { stops: [...state.stops, action.place] })
+          default:
+            return Object.assign({}, state, { [action.placeType]: action.place })
+        }
     default:
       return state
   }

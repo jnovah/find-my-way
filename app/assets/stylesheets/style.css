@@ -11,6 +11,19 @@ h1 {
   text-align: center;
 }
 
+#preview-map {
+  height: 200px;
+  width: 200px;
+}
+
+#directions-map {
+  height: 500px;
+  width: 500px;
+}
+
+#map.hidden {
+  height: 0;
+}
 
 .image {
   background: rgba(255, 255, 255, 0.7);
@@ -199,7 +212,7 @@ input[type=text] {
   text-align: center;
 }
 
-.location.start {
+.location.origin {
   margin-top: 10px;
   border-top-style: solid;
   border-top: #5E66BC;
@@ -365,7 +378,7 @@ input[type=text] {
   justify-content: center;
 }
 
-.start-trip-button {
+.origin-trip-button {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -26,7 +26,7 @@ class Api::V1::DirectionsController < ApplicationController
   def get_routes
     gmaps = GoogleMapsService::Client.new
     routes = gmaps.directions(
-      @trip.start.address, @trip.end.address,
+      @trip.origin.address, @trip.final.address,
       waypoints: @waypoints[:waypoints],
       mode: 'driving',
       alternatives: false,
@@ -59,7 +59,7 @@ class Api::V1::DirectionsController < ApplicationController
 
   def origin_id(index, waypoint_order)
     if index == 0
-      return @trip.start.id
+      return @trip.origin.id
     elsif index == @waypoints[:order_index].length && waypoint_order.length > 0
       return @waypoints[:order_index][waypoint_order.last]
     else
@@ -69,7 +69,7 @@ class Api::V1::DirectionsController < ApplicationController
 
   def destination_id(index, waypoint_order)
     if waypoint_order.length == 0 || index == waypoint_order.length
-      return @trip.end.id
+      return @trip.final.id
     else
       return @waypoints[:order_index][waypoint_order[index]]
     end

@@ -1,10 +1,22 @@
 import React, { Component } from 'react'
 import { Route, NavLink, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Home from './tripIndex/HomeContainer'
 import NewTrip from './tripForm/NewTrip'
 
+const mapStateToProps = state => {
+  return {
+    tripForm: state.trip.tripForm
+  }
+}
 
-class PlanMyTrip extends Component {
+const mapDispatchToProps = dispatch => {
+  return {
+
+  }
+}
+
+class PlanMyTripContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -21,6 +33,10 @@ class PlanMyTrip extends Component {
     }
 
   render() {
+    let className
+    if (this.props.tripForm) {
+      className = 'hidden'
+    }
     return(
       <div>
         <Switch>
@@ -33,7 +49,7 @@ class PlanMyTrip extends Component {
         </Switch>
         <Switch>
           <Route strict path={`${this.props.match.path}index/`} component={Home} />
-          <div className='new-trip-button'>
+          <div className={`new-trip-button ${className}`}>
             <NavLink to={`${this.props.match.path}index/`}><button className="btn btn-4 btn-4c add-new">View all created trips!</button></NavLink>
           </div>
         </Switch>
@@ -41,5 +57,7 @@ class PlanMyTrip extends Component {
     )
   }
 }
+
+const PlanMyTrip = connect(mapStateToProps, mapDispatchToProps)(PlanMyTripContainer)
 
 export default PlanMyTrip

@@ -1,6 +1,4 @@
-<% src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBxgCBGkaioyQNgXAPVEiBfnz9IFeVfXws&v=3.exp&libraries=geometry,drawing,places" %>
-<script type="text/javascript" src="<%= src %>"></script>
-
 <%= javascript_pack_tag 'index.js' %>
-
+<% src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBxgCBGkaioyQNgXAPVEiBfnz9IFeVfXws&v=3.exp&libraries=geometry,drawing,places" %>
+<script  type="text/javascript" src="<%= src %>"></script>
 <div id="app" class="grid-container" />

@@ -5,8 +5,8 @@ FactoryBot.define do
 
     factory :trip_with_places do
       after(:create) do |trip|
-        create(:start, trip: trip)
-        create(:end, trip: trip)
+        create(:origin, trip: trip)
+        create(:final, trip: trip)
         create(:stop, trip: trip)
         create(:stop, trip: trip)
         create(:stop, trip: trip)
@@ -15,16 +15,22 @@ FactoryBot.define do
     end
   end
 
-  factory :start do
+  factory :origin do
     address Faker::Address.street_address
+    coordinates "something"
+    google_place_id Faker::Bitcoin.testnet_address
   end
 
-  factory :end do
+  factory :final do
     address Faker::Address.street_address
+    coordinates "something"
+    google_place_id Faker::Bitcoin.testnet_address
   end
 
   factory :stop do
     address Faker::Address.street_address
+    coordinates "something"
+    google_place_id Faker::Bitcoin.testnet_address
   end
 
   trait :planning do

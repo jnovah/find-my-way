@@ -1,84 +1,88 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import FormField from '../../../../sharedResources/constants/FormField'
+import { setPlaceAddress } from '../actions/setValue'
+import { getGeocode, initPreviewMap } from '../actions/getPreview'
+import { savePlace, selectionChanged } from '../actions/submitForms'
 
+const mapStateToProps = state => {
+  return {
+    place: state.tripForm.place,
+    placeComplete: state.tripForm.placeComplete,
+    tripId: state.trip.currentTrip,
+    formType: state.tripForm.formType,
+    mapLoaded: state.previewMap.mapLoaded,
+    submittingPlaceForm: state.tripForm.submittingPlaceForm,
+    placeSelected: state.tripForm.placeSelected
+  }
+}
 
-class Places extends Component {
+const mapDispatchToProps = dispatch => {
+  return {
+    setPlaceAddress: (address) => { dispatch(setPlaceAddress(address)) },
+    getGeocode: (address) => { dispatch(getGeocode(address)) },
+    savePlace: (address, tripId, type) => { dispatch(savePlace(address, tripId, type)) },
+    initPreviewMap: (coordinates) => { dispatch(initPreviewMap(coordinates)) },
+    selectionChanged: () => { dispatch(selectionChanged()) }
+  }
+}
+
+class PlacesContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      address: '',
-      type: '',
-      lat: '',
-      long: '',
-      placeId: '',
-      name: '',
-      errors: []
-    }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.formPayLoad = this.formPayLoad.bind(this)
-    this.handleFormClear = this.handleFormClear.bind(this)
   }
 
-  componentDidMount() {
-    this.setState({ type: this.props.type, tripId: this.props.tripId })
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.submittingPlaceForm) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.submittingPlaceForm) {
+      !prevProps.placeComplete && this.props.placeComplete && !this.props.mapLoaded ? this.props.initPreviewMap(this.props.place.coordinates) : null
+    }
   }
 
   handleChange(event){
-    this.setState({ address: event })
+    this.props.setPlaceAddress(event)
+    this.props.placeSelected ? this.props.selectionChanged() : null
+  }
+
+  handleSelect(event) {
+    this.props.setPlaceAddress(event)
+    this.props.placeComplete ? this.props.getGeocode(event, 'update') : this.props.getGeocode(event)
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    geocodeByAddress(this.state.address)
-    .then(results => {
-      return getLatLng(results[0])
-    }) .then(latLng => {
-      let payLoad = this.formPayLoad(latLng)
-      this.props.addNewPlace(payLoad, this.props.type)
-      this.handleFormClear()
-    })
-  }
-
-  formPayLoad(coordinates){
-    let payLoad
-    if (coordinates.lat !== '' && coordinates.lng !== '') {
-      payLoad = { address: this.state.address, trip_id:this.props.tripId }
-    } else {
-      errors = this.state.errors
-      errors.push('Must be a valid address')
-      this.setState({ errors: errors })
-    }
-    return payLoad
-  }
-
-  handleFormClear() {
-    this.setState({address: '', lat: '', long: ''})
+    this.props.placeSelected ? this.props.savePlace(this.props.place, this.props.tripId, this.props.formType) : null
   }
 
   render(){
     let inputProps = {
-      value: this.state.address,
-      onChange: this.handleChange,
-      placeholder: this.props.placeholder
-    }
-    let errors
-    if (this.state.errors) {
-      errors = this.state.errors
+      value: this.props.place.address,
+      onChange: this.handleChange
     }
 
     return(
       <div className= "places-form-container">
         <div className="destination place">Seach for a location below by address or name</div>
         <form className='places-form' onSubmit={this.handleSubmit}>
-          <div className='places-ac'><PlacesAutocomplete inputProps={inputProps} /></div>
-          <input className="btn btn-2 btn-2d submit-button place-submit" type='submit' name='Next' />
+          <div className='places-ac'><PlacesAutocomplete inputProps={inputProps} onSelect={this.handleSelect}/></div>
+          <input className="" type='submit' value='Add & Continue' />
         </form>
       </div>
-  )
+    )
   }
 }
+
+const Places = connect(mapStateToProps, mapDispatchToProps)(PlacesContainer)
 
 export default Places
